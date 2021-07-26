@@ -35,5 +35,4 @@ Head.propTypes = {
   url: string,
   ogImage: string
 };
-
 export default Head;

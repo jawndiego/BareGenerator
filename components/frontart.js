@@ -8,7 +8,6 @@ import {ObjectListLeft, ObjectListRight, ObjectListCenter, ObjectListMirror} fro
 
 
 
-
 function MagicMirror({ children, ...props }) {
   const cam = useRef()
   // useFBO creates a WebGL2 buffer for us, it's a helper from the "drei" library
