@@ -1,8 +1,6 @@
 import NextHead from 'next/head';
 import { string } from 'prop-types';
 
-import { INTRO_COPY } from '../lib/constants'
-
 const defaultDescription = INTRO_COPY;
 const defaultKeywords = 'JAWN';
 const defaultOGURL = 'https://jawn.fr/';
