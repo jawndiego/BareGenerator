@@ -1,7 +1,6 @@
 import NextHead from 'next/head';
 import { string } from 'prop-types';
 
-const defaultDescription = INTRO_COPY;
 const defaultKeywords = 'JAWN';
 const defaultOGURL = 'https://jawn.fr/';
 const defaultOGImage = 'https://jawn.fr/og-image.png';
