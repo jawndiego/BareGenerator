@@ -1,11 +1,10 @@
 import * as THREE from 'three'
+import Roboto from '../fonts/Roboto.json';
 import React, {  Suspense, useState, useRef } from 'react'
 import { Canvas, useFrame, createPortal } from '@react-three/fiber'
 import { useGLTF, Stage, Sky, Stars, useFBO, OrbitControls, rotation, PerspectiveCamera, CameraShake, ContactShadows } from '@react-three/drei'
 import {  Beer, Concha, Angel, Plant } from './models'
 import {ObjectListLeft, ObjectListRight, ObjectListCenter, ObjectListMirror} from './models'
-
-
 
 
 function MagicMirror({ children, ...props }) {
@@ -57,14 +56,29 @@ function Lights() {
   )
 }
 
+function LoadingText() {
+  const textOptions = {
+    font: new THREE.FontLoader().parse(Roboto),
+    size: 0.5,
+    height: 0.2
+  };
+
+  return (
+    <mesh>
+      <textGeometry attach='geometry' args={['loading...', textOptions]} />
+      <meshStandardMaterial attach='material' />
+    </mesh>
+  );
+}
+
 export function FrontArt() {
-  console.log("FrontArt");
   const controls = useRef()
+  
   return (
     <div className="front-page_wrapper">
     <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 50 }} gl={{ alpha: false }}>
       <Lights />
-      <Suspense fallback={null}>
+      <Suspense fallback={<LoadingText />}>
         <Stage controls={controls}>
           <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
             <Lights />
