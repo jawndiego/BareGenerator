@@ -1,56 +1,43 @@
 import * as THREE from 'three'
+import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './rawModels';
 import React, {  Suspense, useState, useRef } from 'react'
 import { Canvas, useFrame, createPortal } from '@react-three/fiber'
 import { useGLTF, Stage, Sky, Stars, useFBO, OrbitControls, rotation, PerspectiveCamera, CameraShake, ContactShadows } from '@react-three/drei'
 
-
-// NEW FORMAT CODE GENERATOR 
-//MIRRORCHAR
-
-export function ObjectListMirror(props) {
-  //objectsMirror
-  const objects = [
-    {
-      name: 'angel',
-      pathname: 'angel',
-      materialName: 'Cactus',
-      position: [-1.9, 9, 8],
-      scale: [22, 22, 22],
-      rotation: [2, 0, .49]
-    },
-    {
-      name: 'heem',
-      pathname: 'heem',
-      materialName: 'Cactus',
-      position: [-4.1, 6, 7],
-      scale: [13, 13, 13],
-      rotation: [0, -2.2, 0]
-    },
-    {
-      name: 'boxer',
-      pathname: 'boxer',
-      materialName: 'Cactus',
-      position: [-5, -6, 8],
-      scale: [26, 26, 26],
-      rotation: [0, -4, 0],
-
-    }
-  ]
-  
+/**
+ * 1. Choose a random object from the input objects
+ * 2. Hydrate the object with scene, nodes, and materials via useGLFT
+ * 3. Return the plain object combined with the hydrated fields
+ */
+const chooseAndHydrateObject = (objects) => {
   const randomIndex = Math.floor(Math.random() * objects.length);
-  let randomObject = objects[randomIndex];
-  let {pathname, materialName} = randomObject;
-  
-  const group = useRef()
+  const randomObject = objects[randomIndex];
+  const {materialName, pathname, position, rotation, scale} = randomObject;
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
 
-  console.log(pathname)
+  const material = materials[materialName];
+  const geometry = nodes[pathname].geometry;
+
+  // console.log(pathname);
+
+  return {
+    geometry,
+    material,
+    position,
+    rotation,
+    scale,
+    scene
+  }
+}
+
+export function ObjectListMirror(props) {
+  const randomObject = chooseAndHydrateObject(mirrorObjects);
+  const group = useRef()
 
   useFrame((state) => {
     // This function runs 60 times/second, it binds this component to the render-loop.
     // On unmount this subscription is cleaned up automatically.
 
-    // Rotate 
     const t = state.clock.getElapsedTime()
 
     // Make it float
@@ -60,96 +47,28 @@ export function ObjectListMirror(props) {
     group.current.position.y = 0.5 + (1 + Math.sin(t / 10)) / 5
   })
   
+  console.log('renderMirror');
   return (
     <group ref={group} {...props} dispose={null} >
       <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
-        <mesh object={scene} {...props}  
+        <mesh object={randomObject.scene} {...props}  
             castShadow
             receiveShadow
-            geometry={nodes[pathname].geometry}
-            material={materials[materialName]} />
+            geometry={randomObject.geometry}
+            material={randomObject.material} />
       </group>
     </group>
   )
-  }
-
-//Center character 
+}
 
 export function ObjectListCenter(props) {
-
-  //objects center 
-  
-  const objects = [
-    {
-      name: 'plant',
-      pathname: 'planta',
-      materialName: 'Cactus',
-      position: [-12.5, 3.75, 6],
-      scale: [4.2, 4.2, 4.2],
-      rotation: [1.8, 0, 0.55]
-    
-      
-    },
-    {
-      name: 'nopal001',
-      pathname: 'nopal001',
-      materialName: 'Cactus',
-      position: [-14.5, 0, 6],
-      scale: [.16, .16, .16],
-      rotation: [0, 3, 0.55]
-      
-    },
-    {
-      name: 'boxcactus',
-      pathname: 'boxcactus',
-      materialName: 'boxcactus',
-      position: [-12.5, 5, 6],
-      scale: [8, 8, 8],
-      rotation: [0, 0, 0]
-      
-    },
-    {
-      name: 'bigflower',
-      pathname: 'bigflower001',
-      materialName: 'BoxCactus.002',
-      position: [-12, 3, 6],
-      scale: [6, 6, 6],
-      rotation: [1.8, .3, .4],
-      
-    },
-    {
-      name: 'one1',
-      pathname: 'one1',
-      materialName: 'StandardFF3300',
-      position: [-12, 3, 6],
-      scale: [6, 6, 6],
-      rotation: [0.92, 0, 0.28],
-      
-    },
-    {
-      name: 'snake',
-      pathname: 'snake',
-      materialName: 'colorchart',
-      position: [-12, -3, 6],
-      scale: [6, 6, 6],
-      rotation: [1.9, 0, 0],
-      
-    }
-  ]
-  
-  const randomIndex = Math.floor(Math.random() * objects.length);
-  let randomObject = objects[randomIndex];
-  let { name, pathname, materialName, position, scale, rotation } = randomObject;
-  
+  const randomObject = chooseAndHydrateObject(centerObjects);
   const group = useRef()
-  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
 
-  console.log(pathname)
   useFrame((state) => {
     // This function runs 60 times/second, it binds this component to the render-loop.
     // On unmount this subscription is cleaned up automatically.
 
-    // Rotate 
     const t = state.clock.getElapsedTime()
     
 
@@ -160,142 +79,54 @@ export function ObjectListCenter(props) {
     group.current.position.y = 0.5 + (1 + Math.sin(t / 10)) / 5
   })
   
+  console.log('renderCenter');
   return (
-  
     <group ref={group} {...props} dispose={null} >
       <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
-        <mesh object={scene} {...props}  
+        <mesh object={randomObject.scene} {...props}  
             castShadow
             receiveShadow
-            geometry={nodes[pathname].geometry}
-            material={materials[materialName]} />
+            geometry={randomObject.geometry}
+            material={randomObject.material} />
       </group>
     </group>
   )
-  }
-
-//RIGHTSIDE
-
-export function ObjectListRight(props) {
-
-  //objectsright 
-  
-  const objects = [
-    {
-      name: 'dunkin',
-      pathname: 'dunkin',
-      materialName: 'dunkin',
-      position: [-10.5, .29, 3],
-      scale: [.2, .2, .2],
-      rotation: [8.1, 7.8, 17.1]
-    },
-  
-    {
-      name: 'beer',
-      pathname: '14043_16_oz_Beer_Bottle_v2_L1',
-      materialName: 'Material__4',
-      position: [-10.5, 0, 3],
-      scale: [.36, .36, .36],
-      rotation: [.03, .59, 0],
-    
-    }, 
-    {
-      name: 'yakult',
-      pathname: '04_cap_Circle003',
-      materialName: 'Yakult',
-      position: [-10.5, 0, 3],
-      scale: [30, 30, 30],
-      rotation: [.03, .59, 0],
-    
-    }
-  ]
-  
-  const randomIndex = Math.floor(Math.random() * objects.length);
-  let randomObject = objects[randomIndex];
-  let { name, pathname, materialName, position, scale, rotation } = randomObject;
-  
-  const group = useRef()
-  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`);
-  console.log(pathname)
-  
-  return (
-  
-    <group ref={group} {...props} dispose={null} >
-      <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
-        <mesh object={scene} {...props}  
-            castShadow
-            receiveShadow
-            geometry={nodes[pathname].geometry}
-            material={materials[materialName]} />
-      </group>
-    </group>
-  )
-  }
-
-//LEFTSIDE
-
-export function ObjectListLeft(props) {
-
-//objectsleft objectsright, objectsmiddle objectsmirror 
-
-const objects = [
-  {
-    name: 'concha',
-    pathname: 'PAN_CONCHA001',
-    materialName: 'Default OBJ.001',
-    position: [-15, .29, 3],
-    scale: [.36, .36, .36],
-    rotation: [2, 0, 0]
-  },
-  {
-    name: 'tortilla',
-    pathname: 'TORTILLA_PLATE_OBJ001',
-    materialName: 'tortilla',
-    position: [-15, 1.5, 3],
-    scale: [.25, .25, .25],
-    rotation: [.03, .59, 0]
-  
-  },
-  {
-    name: 'obj0',
-    pathname: 'obj0',
-    materialName: '_Gun_GWdefault',
-    position: [-15, .8, 3],
-    scale: [.6, .6, .6],
-    rotation: [0, 2.4, 1.75]
-  
-  },
-  {
-    name: 'pitaya',
-    pathname: 'Cactus_Fig_04',
-    materialName: 'Cactus_Fig_04_Material',
-    position: [-15, 1.5, 3],
-    scale: [.36, .36, .36],
-    rotation: [.5, .5, 3]
-  
-  }
-]
-
-const randomIndex = Math.floor(Math.random() * objects.length);
-let randomObject = objects[randomIndex];
-let { name, pathname, materialName, position, scale, rotation } = randomObject;
-
-const group = useRef()
-const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`);
-console.log(pathname)
-
-return (
-
-  <group ref={group} {...props} dispose={null} >
-    <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
-      <mesh object={scene} {...props}  
-          castShadow
-          receiveShadow
-          geometry={nodes[pathname].geometry}
-          material={materials[materialName]} />
-    </group>
-  </group>
-)
 }
 
-// Models 
+export function ObjectListRight(props) {  
+  const randomObject = chooseAndHydrateObject(rightObjects);
+  const group = useRef()
+
+  console.log('renderRight');
+  
+  return (
+    <group ref={group} {...props} dispose={null} >
+      <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
+        <mesh object={randomObject.scene} {...props}  
+            castShadow
+            receiveShadow
+            geometry={randomObject.geometry}
+            material={randomObject.material} />
+      </group>
+    </group>
+  );
+}
+
+export function ObjectListLeft(props) {
+  const randomObject = chooseAndHydrateObject(leftObjects);
+  const group = useRef()
+
+  console.log('renderLeft');
+
+  return (
+    <group ref={group} {...props} dispose={null} >
+      <group rotation={randomObject.rotation} scale={randomObject.scale} position={randomObject.position} >
+        <mesh object={randomObject.scene} {...props}  
+            castShadow
+            receiveShadow
+            geometry={randomObject.geometry}
+            material={randomObject.material} />
+      </group>
+    </group>
+  )
+}
