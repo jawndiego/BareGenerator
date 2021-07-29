@@ -88,8 +88,6 @@ export function FrontArt() {
           <ObjectListRight />
           <ObjectListLeft />
           <ObjectListCenter />
-          
-         
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />

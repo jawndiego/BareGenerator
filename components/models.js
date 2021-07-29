@@ -13,7 +13,7 @@ export function ObjectListMirror(props) {
     {
       name: 'angel',
       pathname: 'angel',
-      material: 'Cactus',
+      materialName: 'Cactus',
       position: [-1.9, 9, 8],
       scale: [22, 22, 22],
       rotation: [2, 0, .49]
@@ -21,7 +21,7 @@ export function ObjectListMirror(props) {
     {
       name: 'heem',
       pathname: 'heem',
-      material: 'Cactus',
+      materialName: 'Cactus',
       position: [-4.1, 6, 7],
       scale: [13, 13, 13],
       rotation: [0, -2.2, 0]
@@ -29,7 +29,7 @@ export function ObjectListMirror(props) {
     {
       name: 'boxer',
       pathname: 'boxer',
-      material: 'Cactus',
+      materialName: 'Cactus',
       position: [-5, -6, 8],
       scale: [26, 26, 26],
       rotation: [0, -4, 0],
@@ -39,7 +39,7 @@ export function ObjectListMirror(props) {
   
   const randomIndex = Math.floor(Math.random() * objects.length);
   let randomObject = objects[randomIndex];
-  let { name, pathname, material, position, scale, rotation } = randomObject;
+  let {pathname, materialName} = randomObject;
   
   const group = useRef()
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
@@ -67,7 +67,7 @@ export function ObjectListMirror(props) {
             castShadow
             receiveShadow
             geometry={nodes[pathname].geometry}
-            material={materials[material]} />
+            material={materials[materialName]} />
       </group>
     </group>
   )
@@ -83,7 +83,7 @@ export function ObjectListCenter(props) {
     {
       name: 'plant',
       pathname: 'planta',
-      material: 'Cactus',
+      materialName: 'Cactus',
       position: [-12.5, 3.75, 6],
       scale: [4.2, 4.2, 4.2],
       rotation: [1.8, 0, 0.55]
@@ -93,7 +93,7 @@ export function ObjectListCenter(props) {
     {
       name: 'nopal001',
       pathname: 'nopal001',
-      material: 'Cactus',
+      materialName: 'Cactus',
       position: [-14.5, 0, 6],
       scale: [.16, .16, .16],
       rotation: [0, 3, 0.55]
@@ -102,7 +102,7 @@ export function ObjectListCenter(props) {
     {
       name: 'boxcactus',
       pathname: 'boxcactus',
-      material: 'boxcactus',
+      materialName: 'boxcactus',
       position: [-12.5, 5, 6],
       scale: [8, 8, 8],
       rotation: [0, 0, 0]
@@ -111,7 +111,7 @@ export function ObjectListCenter(props) {
     {
       name: 'bigflower',
       pathname: 'bigflower001',
-      material: 'BoxCactus.002',
+      materialName: 'BoxCactus.002',
       position: [-12, 3, 6],
       scale: [6, 6, 6],
       rotation: [1.8, .3, .4],
@@ -120,7 +120,7 @@ export function ObjectListCenter(props) {
     {
       name: 'one1',
       pathname: 'one1',
-      material: 'StandardFF3300',
+      materialName: 'StandardFF3300',
       position: [-12, 3, 6],
       scale: [6, 6, 6],
       rotation: [0.92, 0, 0.28],
@@ -129,7 +129,7 @@ export function ObjectListCenter(props) {
     {
       name: 'snake',
       pathname: 'snake',
-      material: 'colorchart',
+      materialName: 'colorchart',
       position: [-12, -3, 6],
       scale: [6, 6, 6],
       rotation: [1.9, 0, 0],
@@ -139,7 +139,7 @@ export function ObjectListCenter(props) {
   
   const randomIndex = Math.floor(Math.random() * objects.length);
   let randomObject = objects[randomIndex];
-  let { name, pathname, material, position, scale, rotation } = randomObject;
+  let { name, pathname, materialName, position, scale, rotation } = randomObject;
   
   const group = useRef()
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
@@ -168,7 +168,7 @@ export function ObjectListCenter(props) {
             castShadow
             receiveShadow
             geometry={nodes[pathname].geometry}
-            material={materials[material]} />
+            material={materials[materialName]} />
       </group>
     </group>
   )
@@ -184,7 +184,7 @@ export function ObjectListRight(props) {
     {
       name: 'dunkin',
       pathname: 'dunkin',
-      material: 'dunkin',
+      materialName: 'dunkin',
       position: [-10.5, .29, 3],
       scale: [.2, .2, .2],
       rotation: [8.1, 7.8, 17.1]
@@ -193,7 +193,7 @@ export function ObjectListRight(props) {
     {
       name: 'beer',
       pathname: '14043_16_oz_Beer_Bottle_v2_L1',
-      material: 'Material__4',
+      materialName: 'Material__4',
       position: [-10.5, 0, 3],
       scale: [.36, .36, .36],
       rotation: [.03, .59, 0],
@@ -202,7 +202,7 @@ export function ObjectListRight(props) {
     {
       name: 'yakult',
       pathname: '04_cap_Circle003',
-      material: 'Yakult',
+      materialName: 'Yakult',
       position: [-10.5, 0, 3],
       scale: [30, 30, 30],
       rotation: [.03, .59, 0],
@@ -212,7 +212,7 @@ export function ObjectListRight(props) {
   
   const randomIndex = Math.floor(Math.random() * objects.length);
   let randomObject = objects[randomIndex];
-  let { name, pathname, material, position, scale, rotation } = randomObject;
+  let { name, pathname, materialName, position, scale, rotation } = randomObject;
   
   const group = useRef()
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`);
@@ -226,7 +226,7 @@ export function ObjectListRight(props) {
             castShadow
             receiveShadow
             geometry={nodes[pathname].geometry}
-            material={materials[material]} />
+            material={materials[materialName]} />
       </group>
     </group>
   )
@@ -242,7 +242,7 @@ const objects = [
   {
     name: 'concha',
     pathname: 'PAN_CONCHA001',
-    material: 'Default OBJ.001',
+    materialName: 'Default OBJ.001',
     position: [-15, .29, 3],
     scale: [.36, .36, .36],
     rotation: [2, 0, 0]
@@ -250,7 +250,7 @@ const objects = [
   {
     name: 'tortilla',
     pathname: 'TORTILLA_PLATE_OBJ001',
-    material: 'tortilla',
+    materialName: 'tortilla',
     position: [-15, 1.5, 3],
     scale: [.25, .25, .25],
     rotation: [.03, .59, 0]
@@ -259,7 +259,7 @@ const objects = [
   {
     name: 'obj0',
     pathname: 'obj0',
-    material: '_Gun_GWdefault',
+    materialName: '_Gun_GWdefault',
     position: [-15, .8, 3],
     scale: [.6, .6, .6],
     rotation: [0, 2.4, 1.75]
@@ -268,7 +268,7 @@ const objects = [
   {
     name: 'pitaya',
     pathname: 'Cactus_Fig_04',
-    material: 'Cactus_Fig_04_Material',
+    materialName: 'Cactus_Fig_04_Material',
     position: [-15, 1.5, 3],
     scale: [.36, .36, .36],
     rotation: [.5, .5, 3]
@@ -278,7 +278,7 @@ const objects = [
 
 const randomIndex = Math.floor(Math.random() * objects.length);
 let randomObject = objects[randomIndex];
-let { name, pathname, material, position, scale, rotation } = randomObject;
+let { name, pathname, materialName, position, scale, rotation } = randomObject;
 
 const group = useRef()
 const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`);
@@ -292,7 +292,7 @@ return (
           castShadow
           receiveShadow
           geometry={nodes[pathname].geometry}
-          material={materials[material]} />
+          material={materials[materialName]} />
     </group>
   </group>
 )
