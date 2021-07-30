@@ -1,5 +1,5 @@
-import '../scss/main.scss'
-
+import '../scss/main.scss';
+import React from 'react';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -7,9 +7,9 @@ function MyApp({ Component, pageProps }) {
       <main>
         <Component {...pageProps} />
       </main>
-      
+
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
