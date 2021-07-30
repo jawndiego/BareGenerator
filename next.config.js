@@ -1,8 +1,10 @@
 module.exports = {
   webpack: (config) => {
+    /* eslint-disable no-param-reassign */
     config.node = {
-      fs: 'empty'
-    }
-    return config
-  }
+      fs: 'empty',
+    };
+    /* eslint-enable no-param-reassign */
+    return config;
+  },
 };

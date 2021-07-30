@@ -1,28 +1,15 @@
-import Head from '../components/head'
+import React from 'react';
+import Head from '../components/head';
+import FrontArt from '../components/frontart';
 
-import FrontArt from '../components/frontart'
-
-export default function Index({ data }) {
+export default function Index() {
   return (
-    
     <>
-   
       <Head
         title="Hi."
       />
-
-    
       <FrontArt />
-     
-     
-        <div>
-
-  
-        </div>
-      
-     
-  
-      
+      <div />
     </>
-  )
-};
+  );
+}
