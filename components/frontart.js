@@ -1,10 +1,9 @@
 import * as THREE from 'three'
 import Roboto from '../fonts/Roboto.json';
-import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './rawModels';
+import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
 import React, {  Suspense, useState, useRef } from 'react'
-import { Canvas, useLoader, useFrame, createPortal } from '@react-three/fiber'
-import { useGLTF, Stage, Sky, Stars, useFBO, OrbitControls, rotation, PerspectiveCamera, CameraShake, ContactShadows } from '@react-three/drei'
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { Canvas, useFrame, createPortal } from '@react-three/fiber'
+import { useGLTF, Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
 
 const [ centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw ]
@@ -15,7 +14,7 @@ const [ centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw ]
   }
 
   const object = chooseObject(objectList);
-  useGLTF.preload(`./about-pictures/${objectList.pathname}.glb`)
+  useGLTF.preload(`./about-pictures/${object.pathname}.glb`)
   return object;
 })
 
