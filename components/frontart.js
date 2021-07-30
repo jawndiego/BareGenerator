@@ -1,11 +1,40 @@
 import * as THREE from 'three'
 import Roboto from '../fonts/Roboto.json';
+import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './rawModels';
 import React, {  Suspense, useState, useRef } from 'react'
-import { Canvas, useFrame, createPortal } from '@react-three/fiber'
+import { Canvas, useLoader, useFrame, createPortal } from '@react-three/fiber'
 import { useGLTF, Stage, Sky, Stars, useFBO, OrbitControls, rotation, PerspectiveCamera, CameraShake, ContactShadows } from '@react-three/drei'
-import {  Beer, Concha, Angel, Plant } from './models'
-import {ObjectListLeft, ObjectListRight, ObjectListCenter, ObjectListMirror} from './models'
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import {CenterModel, MirrorModel, StaticModel} from './models'
 
+const [ centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw ]
+  = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
+  const chooseObject = (objects) => {
+    const randomIndex = Math.floor(Math.random() * objects.length);
+    return objects[randomIndex];
+  }
+
+  const object = chooseObject(objectList);
+  useGLTF.preload(`./about-pictures/${objectList.pathname}.glb`)
+  return object;
+})
+
+const hydrateObject = (object) => {
+  const {materialName, pathname, position, rotation, scale} = object;
+  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
+
+  const material = materials[materialName];
+  const geometry = nodes[pathname].geometry;
+
+  return {
+    geometry,
+    material,
+    position,
+    rotation,
+    scale,
+    scene
+  }
+}
 
 function MagicMirror({ children, ...props }) {
   const cam = useRef()
@@ -25,22 +54,16 @@ function MagicMirror({ children, ...props }) {
     state.gl.setRenderTarget(null)
   })
   return (
-
     <>
-
-   
       <mesh {...props}>
         <planeGeometry args={[5, 10]} position={[0,10,10]} />
         {/* The "mirror" is just a boring plane, but it receives the buffer texture */}
         <meshBasicMaterial map={fbo.texture} />
       </mesh>
-    
       <PerspectiveCamera manual ref={cam} fov={150} aspect={2.5 / 5} onUpdate={(c) => c.updateProjectionMatrix()} />
       {/* This is React being awesome, we portal this components children into the separate scene above */}
       {createPortal(children, scene)}
     </>
- 
-  
   )
 }
 
@@ -71,6 +94,24 @@ function LoadingText() {
   );
 }
 
+const Models = () => {
+  const [ centerObject, leftObject, mirrorObject, rightObject ]
+    = [centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw].map(hydrateObject);
+
+  return (
+    <>
+      <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
+        <Lights />
+        <Sky sunPosition={[10000, 10, 10000]} />
+        <MirrorModel object={mirrorObject} />
+      </MagicMirror>
+      <StaticModel object={rightObject} />
+      <StaticModel object={leftObject} />
+      <CenterModel object={centerObject} />
+    </>
+  )
+}
+
 export function FrontArt() {
   const controls = useRef()
   
@@ -80,14 +121,7 @@ export function FrontArt() {
       <Lights />
       <Suspense fallback={<LoadingText />}>
         <Stage controls={controls}>
-          <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
-            <Lights />
-            <Sky sunPosition={[10000, 10, 10000]} />
-            <ObjectListMirror />
-          </MagicMirror>
-          <ObjectListRight />
-          <ObjectListLeft />
-          <ObjectListCenter />
+          <Models />
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
