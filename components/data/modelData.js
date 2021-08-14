@@ -176,7 +176,17 @@ export const rightObjects = [
     scale: [30, 30, 30],
     rotation: [.03, .59, 0],
   
+  },
+  {
+    name: 'jarrito',
+    pathname: 'jarrito',
+    materialName: 'MATERIAL_1001',
+    position: [-10.5, 0, 3],
+    scale: [3, 3, 3],
+    rotation: [0, 0, 0],
+  
   }
+
 ];
 
 export const leftObjects = [
