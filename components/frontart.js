@@ -23,7 +23,10 @@ const hydrateObject = (object) => {
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
 
   const material = materials[materialName];
+  console.log(object);
   const geometry = nodes[pathname].geometry;
+
+
 
   return {
     geometry,
@@ -81,13 +84,13 @@ function Lights() {
 function LoadingText() {
   const textOptions = {
     font: new THREE.FontLoader().parse(Roboto),
-    size: 0.5,
-    height: 0.2
+    size: .9,
+    height: .12
   };
 
   return (
     <mesh>
-      <textGeometry attach='geometry' args={['loading...', textOptions]} />
+      <textGeometry attach='geometry' args={['jawn', textOptions]} />
       <meshStandardMaterial attach='material' />
     </mesh>
   );
@@ -97,6 +100,7 @@ const Models = () => {
   const [ centerObject, leftObject, mirrorObject, rightObject ]
     = [centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw].map(hydrateObject);
 
+ 
   return (
     <>
       <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>

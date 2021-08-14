@@ -1,0 +1,80 @@
+{
+    name: 'plant',
+    pathname: 'planta',
+    materialName: 'Cactus',
+    position: [-12.5, 3.75, 6],
+    scale: [4.2, 4.2, 4.2],
+    rotation: [1.8, 0, 0.55]
+  },
+  {
+    name: 'nopal001',
+    pathname: 'nopal001',
+    materialName: 'Cactus',
+    position: [-14.5, 0, 6],
+    scale: [.16, .16, .16],
+    rotation: [0, 3, 0.55]
+  },
+  {
+    name: 'flowerboy',
+    pathname: 'flowerboy',
+    materialName: 'Material.004',
+    position: [-12.5, 3, 5],
+    scale: [10, 10, 10],
+    rotation: [1.6, -.5, 3]
+  },
+   {
+    name: 'pup',
+    pathname: 'pup',
+    materialName: 'Material.003',
+    position: [-11.5, 2.4, 8],
+    scale: [10, 10, 10],
+    rotation: [1, .5, -1]
+  },
+ {
+    name: 'sadflower',
+    pathname: 'sadflower',
+    materialName: 'Material.002',
+    position: [-12.8, 3, 5],
+    scale: [12, 12, 12],
+    rotation: [1.5, 2.4, 1]
+  },
+  {
+    name: 'star',
+    pathname: 'star',
+    materialName: 'Material.001',
+    position: [-12, 5, -.5],
+    scale: [60, 60, 60],
+    rotation: [0, 3, 0.55]
+  },
+  {
+    name: 'boxcactus',
+    pathname: 'boxcactus',
+    materialName: 'boxcactus',
+    position: [-12.5, 5, 6],
+    scale: [8, 8, 8],
+    rotation: [0, 0, 0]
+  },
+  {
+    name: 'bigflower',
+    pathname: 'bigflower001',
+    materialName: 'BoxCactus.002',
+    position: [-12, 3, 6],
+    scale: [6, 6, 6],
+    rotation: [1.8, .3, .4],
+  },
+  {
+    name: 'one1',
+    pathname: 'one1',
+    materialName: 'StandardFF3300',
+    position: [-12, 3, 6],
+    scale: [6, 6, 6],
+    rotation: [0.92, 0, 0.28],
+  },
+  {
+    name: 'snake',
+    pathname: 'snake',
+    materialName: 'colorchart',
+    position: [-12, -3, 6],
+    scale: [6, 6, 6],
+    rotation: [1.9, 0, 0],
+  }

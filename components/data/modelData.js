@@ -8,6 +8,22 @@ export const mirrorObjects = [
     rotation: [2, 0, .49]
   },
   {
+    name: 'ladydemon',
+    pathname: 'ladydemon',
+    materialName: 'colorchart',
+    position: [-5, -10, 8],
+    scale: [26, 26, 26],
+    rotation: [2, -.3, 2.3],
+  },
+   {
+    name: 'mirrorflower',
+    pathname: 'mirrorflower',
+    materialName: 'colorchart',
+    position: [0, 0, 0],
+    scale: [16, 16, 16],
+    rotation: [7.6, .75, 2],
+  },
+  {
     name: 'heem',
     pathname: 'heem',
     materialName: 'Cactus',
@@ -22,7 +38,30 @@ export const mirrorObjects = [
     position: [-5, -6, 8],
     scale: [26, 26, 26],
     rotation: [0, -4, 0],
-
+  },
+   {
+    name: 'flowercross',
+    pathname: 'flowercross',
+    materialName: 'colorchart',
+    position: [0, -5, .3],
+    scale: [24, 24, 24],
+    rotation: [2, 0, 4],
+  },
+  {
+    name: 'clown001',
+    pathname: 'clown001',
+    materialName: 'colorchart',
+    position: [0, 10, 0],
+    scale: [20, 20, 20],
+    rotation: [1.85, 0, 3.3],
+  },
+  {
+    name: 'demon1',
+    pathname: 'demon1',
+    materialName: 'colorchart',
+    position: [0, -20, 10],
+    scale: [40, 40, 40],
+    rotation: [1.4, 0, 4],
   }
 ];
 
@@ -41,6 +80,38 @@ export const centerObjects = [
     materialName: 'Cactus',
     position: [-14.5, 0, 6],
     scale: [.16, .16, .16],
+    rotation: [0, 3, 0.55]
+  },
+  {
+    name: 'flowerboy',
+    pathname: 'flowerboy',
+    materialName: 'Material.004',
+    position: [-12.5, 3, 5],
+    scale: [10, 10, 10],
+    rotation: [1.6, -.5, 3]
+  },
+   {
+    name: 'pup',
+    pathname: 'pup',
+    materialName: 'Material.003',
+    position: [-11.5, 2.4, 8],
+    scale: [10, 10, 10],
+    rotation: [1, .5, -1]
+  },
+ {
+    name: 'sadflower',
+    pathname: 'sadflower',
+    materialName: 'Material.002',
+    position: [-12.8, 3, 5],
+    scale: [12, 12, 12],
+    rotation: [1.5, 2.4, 1]
+  },
+  {
+    name: 'star',
+    pathname: 'star',
+    materialName: 'Material.001',
+    position: [-12, 5, -.5],
+    scale: [60, 60, 60],
     rotation: [0, 3, 0.55]
   },
   {
@@ -75,6 +146,7 @@ export const centerObjects = [
     scale: [6, 6, 6],
     rotation: [1.9, 0, 0],
   }
+ 
 ];
 
 export const rightObjects = [
@@ -88,7 +160,7 @@ export const rightObjects = [
   },
 
   {
-    name: 'beer',
+    name: '14043_16_oz_Beer_Bottle_v2_L1',
     pathname: '14043_16_oz_Beer_Bottle_v2_L1',
     materialName: 'Material__4',
     position: [-10.5, 0, 3],
@@ -117,20 +189,20 @@ export const leftObjects = [
     rotation: [2, 0, 0]
   },
   {
-    name: 'tortilla',
-    pathname: 'TORTILLA_PLATE_OBJ001',
-    materialName: 'tortilla',
-    position: [-15, 1.5, 3],
-    scale: [.25, .25, .25],
-    rotation: [.03, .59, 0]
-  },
-  {
     name: 'obj0',
     pathname: 'obj0',
     materialName: '_Gun_GWdefault',
     position: [-15, .8, 3],
     scale: [.6, .6, .6],
     rotation: [0, 2.4, 1.75]
+  },
+  {
+    name: 'weed',
+    pathname: 'weed',
+    materialName: 'Material.004',
+    position: [-15, .8, 3],
+    scale: [1.8, 1.8, 1.8],
+    rotation: [1.36, 0.12, -0.01]
   },
   {
     name: 'pitaya',
