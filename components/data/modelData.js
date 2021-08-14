@@ -155,7 +155,7 @@ export const rightObjects = [
     pathname: 'dunkin',
     materialName: 'dunkin',
     position: [-10.5, .29, 3],
-    scale: [.2, .2, .2],
+    scale: [.18, .18, .18],
     rotation: [8.1, 7.8, 17.1]
   },
 
@@ -185,8 +185,23 @@ export const rightObjects = [
     scale: [3, 3, 3],
     rotation: [0, 0, 0],
   
+  },
+  {
+    name: 'coil',
+    pathname: 'coil',
+    materialName: 'colorchart',
+    position: [-10.5, 0, 3],
+    scale: [.8, .8, .8],
+    rotation: [0, 0, 0],
+  },
+  {
+    name: 'money',
+    pathname: 'money',
+    materialName: 'Material #25.003',
+    position: [-15.5, 0, 3],
+    scale: [.038, .038, .038],
+    rotation: [0, 0, 0],
   }
-
 ];
 
 export const leftObjects = [
@@ -218,6 +233,22 @@ export const leftObjects = [
     name: 'pitaya',
     pathname: 'Cactus_Fig_04',
     materialName: 'Cactus_Fig_04_Material',
+    position: [-15, 1.5, 3],
+    scale: [.36, .36, .36],
+    rotation: [.5, .5, 3]
+  },
+  {
+    name: 'beef',
+    pathname: 'beef',
+    materialName: 'wire_177028149',
+    position: [-15, 1.5, 3],
+    scale: [.36, .36, .36],
+    rotation: [.5, .5, 3]
+  },
+  {
+    name: 'beef',
+    pathname: 'beef',
+    materialName: 'wire_177028149',
     position: [-15, 1.5, 3],
     scale: [.36, .36, .36],
     rotation: [.5, .5, 3]
