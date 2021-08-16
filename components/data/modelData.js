@@ -69,7 +69,7 @@ export const centerObjects = [
   {
     name: 'plant',
     pathname: 'planta',
-    materialName: 'Cactus',
+    materialName: 'Cactus.001',
     position: [-12.5, 3.75, 6],
     scale: [4.2, 4.2, 4.2],
     rotation: [1.8, 0, 0.55]
@@ -77,7 +77,7 @@ export const centerObjects = [
   {
     name: 'nopal001',
     pathname: 'nopal001',
-    materialName: 'Cactus',
+    materialName: 'Cactus.004',
     position: [-14.5, 0, 6],
     scale: [.16, .16, .16],
     rotation: [0, 3, 0.55]
@@ -233,14 +233,6 @@ export const leftObjects = [
     name: 'pitaya',
     pathname: 'Cactus_Fig_04',
     materialName: 'Cactus_Fig_04_Material',
-    position: [-15, 1.5, 3],
-    scale: [.36, .36, .36],
-    rotation: [.5, .5, 3]
-  },
-  {
-    name: 'beef',
-    pathname: 'beef',
-    materialName: 'wire_177028149',
     position: [-15, 1.5, 3],
     scale: [.36, .36, .36],
     rotation: [.5, .5, 3]
