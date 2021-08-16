@@ -120,7 +120,7 @@ export function FrontArt() {
   
   return (
     <div className="front-page_wrapper">
-    <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 50 }} gl={{ alpha: false }}>
+    <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 47 }} gl={{ alpha: false }}>
       <Lights />
       <Suspense fallback={<LoadingText />}>
         <Stage controls={controls}>

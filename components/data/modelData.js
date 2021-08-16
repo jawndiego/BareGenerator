@@ -86,7 +86,7 @@ export const centerObjects = [
     name: 'flowerboy',
     pathname: 'flowerboy',
     materialName: 'Material.004',
-    position: [-12.5, 3, 5],
+    position: [-12.5, 2.5, 5],
     scale: [10, 10, 10],
     rotation: [1.6, -.5, 3]
   },
