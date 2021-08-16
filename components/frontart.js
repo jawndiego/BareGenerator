@@ -62,7 +62,7 @@ function MagicMirror({ children, ...props }) {
         {/* The "mirror" is just a boring plane, but it receives the buffer texture */}
         <meshBasicMaterial map={fbo.texture} />
       </mesh>
-      <PerspectiveCamera manual ref={cam} fov={150} aspect={2.5 / 5} onUpdate={(c) => c.updateProjectionMatrix()} />
+      <PerspectiveCamera manual ref={cam} fov={100} aspect={3 / 5} onUpdate={(c) => c.updateProjectionMatrix()} />
       {/* This is React being awesome, we portal this components children into the separate scene above */}
       {createPortal(children, scene)}
     </>
@@ -74,7 +74,7 @@ function Lights() {
     <>
       <color attach="background" args={['#f0f0f0']} />
       <ambientLight intensity={3} color="red" />
-      <pointLight intensity={60} position={[2, 30, 10]} color="red" />
+      <pointLight intensity={30} position={[2, 30, 10]} color="red" />
       <pointLight intensity={6} position={[3, 1, 10]} color="blue" />
       <pointLight intensity={3} position={[3, 10, 30]} color="red" />
     </>
