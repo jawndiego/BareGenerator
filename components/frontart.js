@@ -84,13 +84,14 @@ function Lights() {
 function LoadingText() {
   const textOptions = {
     font: new THREE.FontLoader().parse(Roboto),
-    size: .9,
+    size: .2,
     height: .12
   };
 
   return (
     <mesh>
-      <textGeometry attach='geometry' args={['jawn', textOptions]} />
+      <textGeometry attach='geometry' args={[`${centerObjectRaw.pathname}\n${leftObjectRaw.pathname}\n${rightObjectRaw.pathname}\n${mirrorObjectRaw.pathname}`, textOptions]} />
+
       <meshStandardMaterial attach='material' />
     </mesh>
   );
