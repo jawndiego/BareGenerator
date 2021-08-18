@@ -10,7 +10,7 @@ import { Contract } from '@ethersproject/contracts'
 const JawnSidebar = () => {
 
 const { activateBrowserWallet, account } = useEthers()
-// connected wallet information regarding ETH, JAWN (721), and LUPE(20) balances
+// connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
 const etherBalance = useEtherBalance(account)
 const LUPE = '0xb48497dabaffe085801c1b063e7e54f50b833784'
 const JAWN = '0xf33Cc6f3A9ac3A702aBE0e7070e22644CbdE6826'
@@ -19,20 +19,22 @@ const tokenBalanceJAWN = useTokenBalance(JAWN, account)
 // ask for mint inputs 
 const [to, setTo] = useState('')
 const [uri, setURI] = useState('')
-// Creating a new Contract
+// Creating a new Contract ERC 721
 const mintbaseInterface = new utils.Interface(["function mintBase(address to, string uri) returns (uint256)"])
 const contract = new Contract(JAWN, mintbaseInterface)
+// Creating a new Contract ERC 20 $FRACTIONALIZEDTOKEN
+
 // mint 
-const { send } = useContractFunction(contract, 'mintBase')
+const mintBaseContractFunction = useContractFunction(contract, 'mintBase')
 
 // disables mint button
 const [busy, setBusy] = useState(false)
 
-async function triggerMint() {
+async function MintButton() {
   setBusy(true)
   if (to && uri) {
     return (
-      send(to, uri)
+      mintBaseContractFunction.send(to, uri)
     )
   }
   setBusy(false)
@@ -52,11 +54,15 @@ async function triggerMint() {
           <div>
       <div>
       </div>
-      <a className="lozenge-button doge-sidebar_history-button" onClick={triggerMint} disabled={busy}>Mint</a>
+      <a className="lozenge-button doge-sidebar_history-button" onClick={MintButton} disabled={busy}>Mint</a>
       {account && <p>Account: {account}</p>}
+      {/* token balance stuff hard coded  */}
       {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>}
       {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>}
       {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>}
+      {/* token balance contract call */}
+
+
       <p>to Who?</p>
       <input value={to} onChange={event => setTo(event.target.value)}/>
       <p>enterURI:</p>

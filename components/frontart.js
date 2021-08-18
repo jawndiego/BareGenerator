@@ -15,12 +15,13 @@ const [ centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw ]
 
   const object = chooseObject(objectList);
   useGLTF.preload(`./about-pictures/${object.pathname}.glb`)
+  console.log(object);
   return object;
 })
 
 const hydrateObject = (object) => {
   const {materialName, pathname, position, rotation, scale} = object;
-  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
+  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`, false, false)
 
   const material = materials[materialName];
   console.log(object);
