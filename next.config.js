@@ -4,5 +4,7 @@ module.exports = {
       fs: 'empty'
     }
     return config
-  }
+  },
+  basePath: '/.',
+  assetPrefix: './'
 };
