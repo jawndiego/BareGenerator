@@ -19,25 +19,33 @@ const tokenBalanceJAWN = useTokenBalance(JAWN, account)
 // ask for mint inputs 
 const [to, setTo] = useState('')
 const [uri, setURI] = useState('')
-// Creating a new Contract ERC 721
+// Creating a new Contract ERC 721 interface
 const mintbaseInterface = new utils.Interface(["function mintBase(address to, string uri) returns (uint256)"])
 const contract = new Contract(JAWN, mintbaseInterface)
-// Creating a new Contract ERC 20 $FRACTIONALIZEDTOKEN
-
 // mint 
 const mintBaseContractFunction = useContractFunction(contract, 'mintBase')
-
 // disables mint button
 const [busy, setBusy] = useState(false)
+// only allow minting if balance of Jawn is greater than or equal to 1 
+const [eligible] = useState(false)
 
-async function MintButton() {
+async function AllowMinting() {
   setBusy(true)
-  if (to && uri) {
+  if (!to && !uri) {
     return (
-      mintBaseContractFunction.send(to, uri)
+      window.alert("Fill Out Fields")
     )
   }
-  setBusy(false)
+  else if ( tokenBalanceJAWN >= 2 )
+  {
+    mintBaseContractFunction.send(to, uri).then(() => setBusy(false))
+  }
+else {
+  return (
+   window.alert("not enough JAWN")
+  
+  )
+    } 
 }
 
   return (   
@@ -54,20 +62,18 @@ async function MintButton() {
           <div>
       <div>
       </div>
-      <a className="lozenge-button doge-sidebar_history-button" onClick={MintButton} disabled={busy}>Mint</a>
+      <a className="lozenge-button doge-sidebar_history-button" onClick={AllowMinting} disabled={eligible, busy}>Mint</a>
       {account && <p>Account: {account}</p>}
       {/* token balance stuff hard coded  */}
       {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>}
       {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>}
       {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>}
       {/* token balance contract call */}
-
-
       <p>to Who?</p>
       <input value={to} onChange={event => setTo(event.target.value)}/>
       <p>enterURI:</p>
       <input value={uri} onChange={event => setURI(event.target.value)}/>
-    
+     
      
       
     </div>
