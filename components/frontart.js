@@ -5,18 +5,25 @@ import React, {  Suspense, useState, useRef } from 'react'
 import { Canvas, useFrame, createPortal } from '@react-three/fiber'
 import { useGLTF, Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
+import { withRouter } from 'next/router'
 
-const [ centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw ]
-  = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
-  const chooseObject = (objects) => {
-    const randomIndex = Math.floor(Math.random() * objects.length);
-    return objects[randomIndex];
-  }
 
-  const object = chooseObject(objectList);
-  useGLTF.preload(`./about-pictures/${object.pathname}.glb`)
-  return object;
-})
+
+// function getQueryVariable(variable) {
+//   try { var query = window.location.search.substring(1); } catch {return;};
+//   var vars = query.split("&");
+//   for (var i=0;i<vars.length;i++) {
+//     var pair = vars[i].split("=");
+//     if(pair[0] == variable){return pair[1];}
+//   }
+//   return(false);
+// }
+
+// const center = getQueryVariable('center');
+// const left = getQueryVariable('left');
+// const mirror = getQueryVariable('mirror');
+// const right = getQueryVariable('right');
+
 
 const hydrateObject = (object) => {
   const {materialName, pathname, position, rotation, scale} = object;
@@ -90,15 +97,28 @@ function LoadingText() {
 
   return (
     <mesh>
-      <textGeometry attach='geometry' args={[`${centerObjectRaw.pathname}\n${leftObjectRaw.pathname}\n${rightObjectRaw.pathname}\n${mirrorObjectRaw.pathname}`, textOptions]} />
+      {/* <textGeometry attach='geometry' args={[`${centerObjectRaw.pathname}\n${leftObjectRaw.pathname}\n${rightObjectRaw.pathname}\n${mirrorObjectRaw.pathname}`, textOptions]} /> */}
       <meshStandardMaterial attach='material' />
     </mesh>
   );
 }
 
-const Models = () => {
+const Models = ({ query }) => {
+  const { center, left, mirror, right } = query;
+
+  const centerObjectPlain = centerObjects.filter(object => object.name === center)[0];
+  const leftObjectPlain = leftObjects.filter(object => object.name === left)[0];
+  const mirrorObjectPlain = mirrorObjects.filter(object => object.name === mirror)[0];
+  const rightObjectPlain = rightObjects.filter(object => object.name === right)[0];
+
+  // debugger
+  [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(object => {
+      useGLTF.preload(`./about-pictures/${object.pathname}.glb`)
+      return object;
+  })
+  
   const [ centerObject, leftObject, mirrorObject, rightObject ]
-    = [centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw].map(hydrateObject);
+    = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
 
  
   return (
@@ -115,7 +135,8 @@ const Models = () => {
   )
 }
 
-export function FrontArt() {
+export function FrontArt({ router }) {
+  const { query } = router;
   const controls = useRef()
   
   return (
@@ -124,7 +145,7 @@ export function FrontArt() {
       <Lights />
       <Suspense fallback={<LoadingText />}>
         <Stage controls={controls}>
-          <Models />
+          <Models query={query} />
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
@@ -133,4 +154,4 @@ export function FrontArt() {
   )
 }
 
-export default FrontArt
+export default withRouter(FrontArt)

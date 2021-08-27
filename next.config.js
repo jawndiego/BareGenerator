@@ -5,6 +5,6 @@ module.exports = {
     }
     return config
   },
-  basePath: '/.',
-  assetPrefix: './'
+  assetPrefix: './',
+  basePath: '/.'
 };

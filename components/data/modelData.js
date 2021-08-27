@@ -1,4 +1,4 @@
-export const mirrorObjects = [
+const mirrorObjects = [
   {
     name: 'angel',
     pathname: 'angel',
@@ -65,7 +65,7 @@ export const mirrorObjects = [
   }
 ];
 
-export const centerObjects = [
+const centerObjects = [
   {
     name: 'plant',
     pathname: 'planta',
@@ -149,7 +149,7 @@ export const centerObjects = [
  
 ];
 
-export const rightObjects = [
+const rightObjects = [
   {
     name: 'dunkin',
     pathname: 'dunkin',
@@ -204,7 +204,7 @@ export const rightObjects = [
   }
 ];
 
-export const leftObjects = [
+const leftObjects = [
   {
     name: 'concha',
     pathname: 'PAN_CONCHA001',
@@ -246,3 +246,5 @@ export const leftObjects = [
     rotation: [.5, .5, 3]
   }
 ]
+
+module.exports = { mirrorObjects, centerObjects, leftObjects, rightObjects };
