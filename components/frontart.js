@@ -7,33 +7,18 @@ import { useGLTF, Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@
 import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
 
-
-
-// function getQueryVariable(variable) {
-//   try { var query = window.location.search.substring(1); } catch {return;};
-//   var vars = query.split("&");
-//   for (var i=0;i<vars.length;i++) {
-//     var pair = vars[i].split("=");
-//     if(pair[0] == variable){return pair[1];}
-//   }
-//   return(false);
-// }
-
-// const center = getQueryVariable('center');
-// const left = getQueryVariable('left');
-// const mirror = getQueryVariable('mirror');
-// const right = getQueryVariable('right');
-
+const [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
+  = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
+  const randomIndex = Math.floor(Math.random() * objectList.length);
+  return objectList[randomIndex];;
+})
 
 const hydrateObject = (object) => {
   const {materialName, pathname, position, rotation, scale} = object;
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
 
   const material = materials[materialName];
-  console.log(object);
   const geometry = nodes[pathname].geometry;
-
-
 
   return {
     geometry,
@@ -88,7 +73,7 @@ function Lights() {
   )
 }
 
-function LoadingText() {
+function LoadingText({ modelNames }) {
   const textOptions = {
     font: new THREE.FontLoader().parse(Roboto),
     size: .3,
@@ -97,30 +82,14 @@ function LoadingText() {
 
   return (
     <mesh>
-      {/* <textGeometry attach='geometry' args={[`${centerObjectRaw.pathname}\n${leftObjectRaw.pathname}\n${rightObjectRaw.pathname}\n${mirrorObjectRaw.pathname}`, textOptions]} /> */}
+      <textGeometry attach='geometry' args={[`${modelNames.center}\n${modelNames.left}\n${modelNames.right}\n${modelNames.mirror}`, textOptions]} />
       <meshStandardMaterial attach='material' />
     </mesh>
   );
 }
 
-const Models = ({ query }) => {
-  const { center, left, mirror, right } = query;
-
-  const centerObjectPlain = centerObjects.filter(object => object.name === center)[0];
-  const leftObjectPlain = leftObjects.filter(object => object.name === left)[0];
-  const mirrorObjectPlain = mirrorObjects.filter(object => object.name === mirror)[0];
-  const rightObjectPlain = rightObjects.filter(object => object.name === right)[0];
-
-  // debugger
-  [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(object => {
-      useGLTF.preload(`./about-pictures/${object.pathname}.glb`)
-      return object;
-  })
-  
-  const [ centerObject, leftObject, mirrorObject, rightObject ]
-    = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
-
- 
+const Models = ({ models }) => {
+  const { centerObject, leftObject, rightObject, mirrorObject } = models;
   return (
     <>
       <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
@@ -138,14 +107,26 @@ const Models = ({ query }) => {
 export function FrontArt({ router }) {
   const { query } = router;
   const controls = useRef()
+
+  let centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain;
+
+  centerObjectPlain = query.center ? centerObjects.filter(object => object.name === center)[0] : randomCenterObject;
+  leftObjectPlain = query.left ? leftObjects.filter(object => object.name === left)[0]: randomLeftObject;
+  rightObjectPlain = query.right ? rightObjects.filter(object => object.name === right)[0]: randomRightObject;
+  mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === mirror)[0]: randomMirrorObject;
   
+  const [ centerObject, leftObject, mirrorObject, rightObject ]
+    = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
+
   return (
     <div className="front-page_wrapper">
     <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 44.5 }} gl={{ alpha: false }}>
       <Lights />
-      <Suspense fallback={<LoadingText />}>
+      <Suspense fallback={
+        <LoadingText modelNames={{ center: centerObject.name, left: leftObject.name, right: rightObject.name, mirror: mirrorObject.name }} />
+      }>
         <Stage controls={controls}>
-          <Models query={query} />
+          <Models models={ centerObject, leftObject, mirrorObject, rightObject } />
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
