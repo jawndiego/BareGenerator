@@ -17,5 +17,3 @@ yarn-error.log*
 public/.DS_STORE
 
 out
-
-scripts/tmp
