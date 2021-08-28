@@ -24,10 +24,8 @@ const hydrateObject = (object) => {
   const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`, false, false)
 
   const material = materials[materialName];
-  console.log(object);
+    console.log(object);
   const geometry = nodes[pathname].geometry;
-
-
 
   return {
     geometry,
@@ -101,6 +99,7 @@ function LoadingText() {
 const Models = () => {
   const [ centerObject, leftObject, mirrorObject, rightObject ]
     = [centerObjectRaw, leftObjectRaw, mirrorObjectRaw, rightObjectRaw].map(hydrateObject);
+    
 
  
   return (

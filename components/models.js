@@ -15,7 +15,9 @@ export function MirrorModel({ object }) {
     group.current.rotation.x = Math.cos(t) / 9
     group.current.rotation.y = Math.sin(t / 12) / 5
     group.current.position.y = 0.5 + (1 + Math.sin(t / 10)) / 5
-  })
+
+  
+   })
   
   return <StaticModel object={object} group={group} />;
 }

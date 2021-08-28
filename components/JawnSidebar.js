@@ -36,7 +36,7 @@ async function AllowMinting() {
       window.alert("Fill Out Fields")
     )
   }
-  else if ( tokenBalanceJAWN >= 2 )
+  else if ( tokenBalanceJAWN >= 2.1 )
   {
     mintBaseContractFunction.send(to, uri).then(() => setBusy(false))
   }
@@ -55,6 +55,7 @@ else {
       <div className="doge-sidebar_inner">
     
         <div className="doge-sidebar_title">
+          {/* connects wallet */}
         <a className="lozenge-button doge-sidebar_history-button" onClick={() => activateBrowserWallet()}>Connect</a>
         <Link href={'/collection'}>
             <a className="lozenge-button doge-sidebar_history-button">Collection</a>
@@ -63,24 +64,20 @@ else {
       <div>
       </div>
       <a className="lozenge-button doge-sidebar_history-button" onClick={AllowMinting} disabled={eligible, busy}>Mint</a>
+       {/* queriestoken balance stuff hard coded  */}
       {account && <p>Account: {account}</p>}
-      {/* token balance stuff hard coded  */}
       {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>}
       {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>}
       {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>}
-      {/* token balance contract call */}
+      {/* required fields to make contract call at mintbase*/}
       <p>to Who?</p>
       <input value={to} onChange={event => setTo(event.target.value)}/>
       <p>enterURI:</p>
       <input value={uri} onChange={event => setURI(event.target.value)}/>
      
-     
       
     </div>
         
-          {/* <Link href={'/doge-history'}> */}
-            {/* <a className="lozenge-button doge-sidebar_history-button">collection</a> */}
-          {/* </Link> */}
          </div>
         
       </div>
