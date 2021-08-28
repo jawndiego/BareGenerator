@@ -88,8 +88,12 @@ function LoadingText({ modelNames }) {
   );
 }
 
-const Models = ({ models }) => {
-  const { centerObject, leftObject, rightObject, mirrorObject } = models;
+const Models = ({ modelsPlain }) => {
+  const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = modelsPlain;
+
+  const [ centerObject, leftObject, mirrorObject, rightObject ]
+  = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
+
   return (
     <>
       <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
@@ -110,23 +114,20 @@ export function FrontArt({ router }) {
 
   let centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain;
 
-  centerObjectPlain = query.center ? centerObjects.filter(object => object.name === center)[0] : randomCenterObject;
-  leftObjectPlain = query.left ? leftObjects.filter(object => object.name === left)[0]: randomLeftObject;
-  rightObjectPlain = query.right ? rightObjects.filter(object => object.name === right)[0]: randomRightObject;
-  mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === mirror)[0]: randomMirrorObject;
-  
-  const [ centerObject, leftObject, mirrorObject, rightObject ]
-    = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
+  centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
+  leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
+  rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
+  mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
 
   return (
     <div className="front-page_wrapper">
     <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 44.5 }} gl={{ alpha: false }}>
       <Lights />
       <Suspense fallback={
-        <LoadingText modelNames={{ center: centerObject.name, left: leftObject.name, right: rightObject.name, mirror: mirrorObject.name }} />
+        <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
       }>
         <Stage controls={controls}>
-          <Models models={ centerObject, leftObject, mirrorObject, rightObject } />
+          <Models modelsPlain={{ centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain }} />
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
