@@ -39,6 +39,7 @@ export function CenterModel({ object }) {
 }
 
 export function StaticModel({ object, group }) {  
+    console.log(object);
   return (
     <group ref={group} dispose={null} >
       <group rotation={object.rotation} scale={object.scale} position={object.position} >
