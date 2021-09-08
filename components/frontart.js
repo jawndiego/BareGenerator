@@ -205,7 +205,7 @@ export function FrontArt({ router }) {
   mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
 
   return (
-    <div className="front-page_wrapper" onClick={()=> {setWhat(what+1)}}>
+    <div className="front-page_wrapper" onClick={()=> {setWhat(what+1)}} onTouchStart={()=> {setWhat(what+1)}}>
     <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 44.5 }} gl={{ alpha: false }}>
       <Lights />
       <Suspense fallback={
