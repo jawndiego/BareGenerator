@@ -48,16 +48,16 @@ export const mirrorObjects = [
     rotation: [2, 0, 4],
   },
   {
-    name: 'clown001',
-    pathname: 'clown001',
+    name: 'payaso',
+    pathname: 'payaso',
     materialName: 'colorchart',
     position: [0, 10, 0],
     scale: [8, 8, 8],
     rotation: [1.85, 0, 3.3],
   },
   {
-    name: 'demon1',
-    pathname: 'demon1',
+    name: 'demonio',
+    pathname: 'demonio',
     materialName: 'colorchart',
     position: [-2, -18, 4],
     scale: [30, 30, 30],
@@ -69,15 +69,15 @@ export const centerObjects = [
   {
     name: 'plant',
     pathname: 'planta',
-    materialName: 'Cactus.001',
+    materialName: 'Cactus',
     position: [-12.5, 3.75, 6],
     scale: [4.2, 4.2, 4.2],
     rotation: [1.8, 0, 0.55]
   },
   {
-    name: 'nopal001',
-    pathname: 'nopal001',
-    materialName: 'Cactus.004',
+    name: 'nopal',
+    pathname: 'nopal',
+    materialName: 'Cactus',
     position: [-14.5, 0, 6],
     scale: [.16, .16, .16],
     rotation: [0, 3, 0.55]
@@ -85,7 +85,7 @@ export const centerObjects = [
   {
     name: 'flowerboy',
     pathname: 'flowerboy',
-    materialName: 'Material.004',
+    materialName: 'colorchart',
     position: [-12.5, 2.5, 5],
     scale: [10, 10, 10],
     rotation: [1.6, -.5, 3]
@@ -93,7 +93,7 @@ export const centerObjects = [
    {
     name: 'pup',
     pathname: 'pup',
-    materialName: 'Material.003',
+    materialName: 'colorchart',
     position: [-11.5, 2.4, 8],
     scale: [10, 10, 10],
     rotation: [1, .5, -1]
@@ -101,7 +101,7 @@ export const centerObjects = [
  {
     name: 'sadflower',
     pathname: 'sadflower',
-    materialName: 'Material.002',
+    materialName: 'colorchart',
     position: [-12.8, 3, 5],
     scale: [12, 12, 12],
     rotation: [1.5, 2.4, 1]
@@ -109,7 +109,7 @@ export const centerObjects = [
   {
     name: 'star',
     pathname: 'star',
-    materialName: 'Material.001',
+    materialName: 'colorchart',
     position: [-12, 5, -.5],
     scale: [60, 60, 60],
     rotation: [0, 3, 0.55]
@@ -123,16 +123,16 @@ export const centerObjects = [
     rotation: [0, 0, 0]
   },
   {
-    name: 'bigflower',
-    pathname: 'bigflower001',
-    materialName: 'BoxCactus.002',
+    name: 'florebus',
+    pathname: 'florebus',
+    materialName: 'BoxCactus',
     position: [-12, 3, 6],
     scale: [6, 6, 6],
     rotation: [1.8, .3, .4],
   },
   {
-    name: 'one1',
-    pathname: 'one1',
+    name: 'sticky',
+    pathname: 'sticky',
     materialName: 'StandardFF3300',
     position: [-12, 3, 6],
     scale: [6, 6, 6],
@@ -160,9 +160,9 @@ export const rightObjects = [
   },
 
   {
-    name: '14043_16_oz_Beer_Bottle_v2_L1',
-    pathname: '14043_16_oz_Beer_Bottle_v2_L1',
-    materialName: 'Material__4',
+    name: 'beer',
+    pathname: 'Beer',
+    materialName: 'Chela',
     position: [-10.5, 0, 3],
     scale: [.36, .36, .36],
     rotation: [.03, .59, 0],
@@ -170,7 +170,7 @@ export const rightObjects = [
   }, 
   {
     name: 'yakult',
-    pathname: '04_cap_Circle003',
+    pathname: 'yakult',
     materialName: 'Yakult',
     position: [-10.5, 0, 3],
     scale: [30, 30, 30],
@@ -197,7 +197,7 @@ export const rightObjects = [
   {
     name: 'money',
     pathname: 'money',
-    materialName: 'Material #25.003',
+    materialName: 'money',
     position: [-15.5, 0, 3],
     scale: [.038, .038, .038],
     rotation: [0, 0, 0],
@@ -207,16 +207,16 @@ export const rightObjects = [
 export const leftObjects = [
   {
     name: 'concha',
-    pathname: 'PAN_CONCHA001',
-    materialName: 'Default OBJ.001',
+    pathname: 'concha',
+    materialName: 'conchita',
     position: [-15, .29, 3],
     scale: [.36, .36, .36],
     rotation: [2, 0, 0]
   },
   {
-    name: 'obj0',
-    pathname: 'obj0',
-    materialName: '_Gun_GWdefault',
+    name: 'quete',
+    pathname: 'quete',
+    materialName: 'gat',
     position: [-15, .8, 3],
     scale: [.6, .6, .6],
     rotation: [0, 2.4, 1.75]
@@ -224,14 +224,14 @@ export const leftObjects = [
   {
     name: 'weed',
     pathname: 'weed',
-    materialName: 'Material.004',
+    materialName: 'weed',
     position: [-15, .8, 3],
     scale: [1.8, 1.8, 1.8],
     rotation: [1.36, 0.12, -0.01]
   },
   {
     name: 'pitaya',
-    pathname: 'Cactus_Fig_04',
+    pathname: 'pitaya',
     materialName: 'Cactus_Fig_04_Material',
     position: [-15, 1.5, 3],
     scale: [.36, .36, .36],
