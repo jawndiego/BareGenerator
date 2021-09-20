@@ -1,11 +1,12 @@
 import * as THREE from 'three'
 import Roboto from '../fonts/Roboto.json';
 import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
-import React, {  Suspense, useState, useRef } from 'react'
+import React, {  Suspense, useEffect, useState, useRef } from 'react'
 import { Canvas, useFrame, createPortal } from '@react-three/fiber'
-import { useGLTF, Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
+import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 
 const [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
   = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
@@ -13,12 +14,27 @@ const [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObj
   return objectList[randomIndex];;
 })
 
-const hydrateObject = (object) => {
-  const {materialName, pathname, position, rotation, scale} = object;
-  const { scene, nodes, materials } = useGLTF(`./about-pictures/${pathname}.glb`)
+// Instantiate a loader
+const loader = new GLTFLoader();
 
-  const material = materials[materialName];
-  const geometry = nodes[pathname].geometry;
+// Optional: Provide a DRACOLoader instance to decode compressed mesh data
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath( './' );
+loader.setDRACOLoader( dracoLoader );
+
+const hydrateObject = async (object) => {
+  const {pathname, position, rotation, scale} = object;
+  let scene, material, geometry;
+    // Load a glTF resource
+  const gltf = await loader.loadAsync(`./about-pictures/${pathname}.glb`);
+  material = gltf.scene.children[0].material;
+  geometry = gltf.scene.children[0].geometry;
+  scene = gltf.scene;
+
+  gltf.scene; // THREE.Group
+  gltf.scenes; // Array<THREE.Group>
+  gltf.cameras; // Array<THREE.Camera>
+  gltf.asset; // Object
 
   return {
     geometry,
@@ -89,12 +105,10 @@ function LoadingText({ modelNames }) {
 }
 
 const Models = ({ modelsPlain }) => {
-  const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = modelsPlain;
+  const { centerObject, leftObject, rightObject, mirrorObject } = modelsPlain;
+  
 
-  const [ centerObject, leftObject, mirrorObject, rightObject ]
-  = [centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain].map(hydrateObject);
-
-  return (
+  return (centerObject && leftObject && rightObject && mirrorObject) ? (
     <>
       <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
         <Lights />
@@ -105,19 +119,33 @@ const Models = ({ modelsPlain }) => {
       <StaticModel object={leftObject} />
       <CenterModel object={centerObject} />
     </>
-  )
+  ) : null;
 }
 
 export function FrontArt({ router }) {
-  const { query } = router;
+  const { asPath } = router;
+  const queryString = asPath.slice(2);
+  const queryPairs = queryString.split('&');
+  const query = queryPairs.reduce((object, pair) => {
+    const [key, value] = pair.split('=');
+    return {...object, [key]: value}
+  }, {})
   const controls = useRef()
 
-  let centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain;
+  const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
+  const leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
+  const rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
+  const mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
 
-  centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
-  leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
-  rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
-  mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
+  const [objects, setObjects] = useState({});
+
+  useEffect(() => {
+    Promise.all([hydrateObject(centerObjectPlain), hydrateObject(leftObjectPlain), hydrateObject(rightObjectPlain), hydrateObject(mirrorObjectPlain)]).then(
+      ([center, left, right, mirror]) => {
+        setObjects({ center, left, right, mirror })
+      }
+    )
+  }, [])
 
   return (
     <div className="front-page_wrapper">
@@ -126,8 +154,8 @@ export function FrontArt({ router }) {
       <Suspense fallback={
         <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
       }>
-        <Stage controls={controls}>
-          <Models modelsPlain={{ centerObjectPlain, leftObjectPlain, mirrorObjectPlain, rightObjectPlain }} />
+        <Stage controls={controls} >
+          <Models modelsPlain={{ centerObject: objects.center, leftObject: objects.left, mirrorObject: objects.mirror, rightObject: objects.right }} />
         </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
