@@ -3,10 +3,9 @@ import Roboto from '../fonts/Roboto.json';
 import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
 import React, {  Suspense, useEffect, useState, useRef } from 'react'
 import { Canvas, useFrame, createPortal } from '@react-three/fiber'
-import { useGLTF, Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
-import { useLoader } from '@react-three/fiber'
 import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 
 const [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
