@@ -20,7 +20,7 @@ const loader = new GLTFLoader();
 
 // Optional: Provide a DRACOLoader instance to decode compressed mesh data
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath( '/' );
+dracoLoader.setDecoderPath( './' );
 loader.setDRACOLoader( dracoLoader );
 
 const hydrateObject = async (object) => {
