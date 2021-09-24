@@ -1,29 +1,44 @@
 const fs = require('fs');
 const { centerObjects, mirrorObjects, leftObjects, rightObjects } = require('../components/data/modelData');
 
+const open = require('open');
 
-const writeRandom = (count) => {
-    if (count >= 10) return;
-    const centerObject = centerObjects[Math.floor(Math.random() * centerObjects.length)]
-    const mirrorObject = mirrorObjects[Math.floor(Math.random() * mirrorObjects.length)]
-    const leftObject = leftObjects[Math.floor(Math.random() * leftObjects.length)]
-    const rightObject = rightObjects[Math.floor(Math.random() * rightObjects.length)]
-    
-    const metadata = {
-      properties: {
-        'center object': centerObject.name,
-        'left object': leftObject.name,
-        'right object': rightObject.name,
-        'mirror object': mirrorObject.name
-      },
-      description: "Llego con las manos llenas, aqui te ofrezco halgo light.",
-      name: "ALGO-LIGHT",
-      animation_url: `https://ydqscsnqm2fxb7ocgaxbgt2rbin2yp25chlwzlhj4gn7zfr24e6q.arweave.net/wOEhSbBmi3D9wjAuE09RChusP10R12ys6eGb_JY64T0/index.html?mirror=${mirrorObject.name}&center=${centerObject.name}&right=${rightObject.name}&left=${leftObject.name}`,
-      image: "https://ipfs.io/ipfs/bafybeidymgdkiijmglr535fsagpkxp37bskkjy5swb2jkwspvreifh7th4",
-    }
-    
-    fs.writeFile(`./metadata/metadata/${count}.json`, JSON.stringify(metadata), (e) => console.log(e));
-    writeRandom(count + 1);
-}
+let count = 1;
+let centerObject, mirrorObject, leftObject, rightObject;
 
-writeRandom(0);
+centerObjects.forEach(co => {
+  centerObject = co;
+  mirrorObjects.forEach(mo => {
+    mirrorObject = mo;
+    leftObjects.forEach(lo => {
+      leftObject = lo;
+      rightObjects.forEach(ro => {
+        rightObject = ro;
+        const siteUrl = `https://tgatxjzujk2ddwqke6qmpqi3hw6fr2kjbt5x4lghj7mzj6fztigq.arweave.net/mYE7pzRKtDHaCiegx8EbPbxY6UkM-34sx0_ZlPi5mg0/index.html?mirror=${mirrorObject.name}&center=${centerObject.name}&right=${rightObject.name}&left=${leftObject.name}`;
+        const metadata = {
+          properties: {
+            'center object': centerObject.name,
+            'left object': leftObject.name,
+            'right object': rightObject.name,
+            'mirror object': mirrorObject.name
+          },
+          description: "Llego con las manos llenas, aqui te ofrezco halgo light.",
+          name: "ALGO-LIGHT",
+          animation_url: siteUrl,
+          image: `https://bijm75ajnf2py2a25uz2vmqziujorhpck7kfk72ipynl4fgv72aa.arweave.net/ChLP9AlpdPxoGu0zqrIZRRLoneJX1FV_SH4avhTV_oA/${count}.png`
+        }
+        
+        try {
+          if (!fs.existsSync(`/Users/jonathanreis/Downloads/${count}.png`)) {
+            console.log(count);
+            var url = `${siteUrl}&count=${count}`;
+            open(url);
+          }
+        }
+
+        fs.writeFileSync(`./metadata/metadata/${count}.json`, JSON.stringify(metadata, null, 2), (e) => console.log(e));
+        count++;
+      })
+    })
+  })
+})

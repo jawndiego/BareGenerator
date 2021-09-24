@@ -107,7 +107,6 @@ function LoadingText({ modelNames }) {
 const Models = ({ modelsPlain }) => {
   const { centerObject, leftObject, rightObject, mirrorObject } = modelsPlain;
   
-
   return (centerObject && leftObject && rightObject && mirrorObject) ? (
     <>
       <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
@@ -123,13 +122,17 @@ const Models = ({ modelsPlain }) => {
 }
 
 export function FrontArt({ router }) {
+  let query = {};
   const { asPath } = router;
-  const queryString = asPath.slice(2);
-  const queryPairs = queryString.split('&');
-  const query = queryPairs.reduce((object, pair) => {
-    const [key, value] = pair.split('=');
-    return {...object, [key]: value}
-  }, {})
+  const pathArray = asPath.split('?')
+  if (pathArray.length === 2) {
+    const queryString = pathArray[1];
+    const queryPairs = queryString.split('&');
+    query = queryPairs.reduce((object, pair) => {
+      const [key, value] = pair.split('=');
+      return {...object, [key]: value}
+    }, {})
+  }
   const controls = useRef()
 
   const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
@@ -149,7 +152,11 @@ export function FrontArt({ router }) {
 
   return (
     <div className="front-page_wrapper">
-    <Canvas dpr={(1,2)} camera={{ position: [0, 4, 8], fov: 44.5 }} gl={{ alpha: false }}>
+    <Canvas
+      dpr={(1,2)}
+      camera={{ position: [0, 4, 8], fov: 44.5 }}
+      gl={{ alpha: false }}
+    >
       <Lights />
       <Suspense fallback={
         <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
