@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Roboto from '../fonts/Roboto.json';
 import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
 import React, {  Suspense, useEffect, useState, useRef } from 'react'
-import { Canvas, useFrame, createPortal, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, createPortal } from '@react-three/fiber'
 import { Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
@@ -155,7 +155,7 @@ export function FrontArt({ router }) {
     <Canvas
       dpr={(1,2)}
       camera={{ position: [0, 4, 8], fov: 44.5 }}
-      gl={{ alpha: false, preserveDrawingBuffer: true }}
+      gl={{ alpha: false }}
     >
       <Lights />
       <Suspense fallback={
