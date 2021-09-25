@@ -161,7 +161,7 @@ export const rightObjects = [
 
   {
     name: 'beer',
-    pathname: 'Beer',
+    pathname: 'beer',
     materialName: 'Chela',
     position: [-10.5, 0, 3],
     scale: [.36, .36, .36],
