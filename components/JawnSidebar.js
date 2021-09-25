@@ -52,33 +52,26 @@ else {
 
     <div className="doge-sidebar_wrapper">
       <div className="doge-sidebar_inner">
-
         <div className="doge-sidebar_title">
           {/* connects wallet */}
-        <a className="lozenge-button doge-sidebar_history-button" onClick={() => activateBrowserWallet()}>Connect</a>
-        <Link href={'/collection'}>
-            <a className="lozenge-button doge-sidebar_history-button">Collection</a>
+          <a className="lozenge-button doge-sidebar_history-button" onClick={() => activateBrowserWallet()}>Connect</a>
+          <Link href={'/collection'}>
+              <a className="lozenge-button doge-sidebar_history-button">Collection</a>
           </Link>
+          <a className="lozenge-button doge-sidebar_history-button" onClick={AllowMinting} disabled={eligible, busy}>Mint</a>
           <div>
-      <div>
-      </div>
-      <a className="lozenge-button doge-sidebar_history-button" onClick={AllowMinting} disabled={eligible, busy}>Mint</a>
-       {/* queriestoken balance stuff hard coded  */}
-      {account && <p>Account: {account}</p>}
-      {/* {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>} */}
-      {/* {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>} */}
-      {/* {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>} */}
-      {/* required fields to make contract call at mintbase*/}
-      <p>to Who?</p>
-      <input value={to} onChange={event => setTo(event.target.value)}/>
-      <p>enterURI:</p>
-      <input value={uri} onChange={event => setURI(event.target.value)}/>
-     
-      
-    </div>
-        
-         </div>
-        
+            {/* queriestoken balance stuff hard coded  */}
+            {account && <p>Account: {account}</p>}
+            {/* {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>} */}
+            {/* {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>} */}
+            {/* {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>} */}
+            {/* required fields to make contract call at mintbase*/}
+            <p>to Who?</p>
+            <input value={to} onChange={event => setTo(event.target.value)}/>
+            <p>enterURI:</p>
+            <input value={uri} onChange={event => setURI(event.target.value)}/>
+          </div>
+        </div>
       </div>
     </div>
   )
