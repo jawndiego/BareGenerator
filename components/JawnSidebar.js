@@ -61,9 +61,9 @@ const JawnSidebar = () => {
           >
             Connect
           </button>
-          <Link href={'/collection'}>
-            <a className="lozenge-button doge-sidebar_button-even doge-sidebar_history-button">Collection</a>
-          </Link>
+
+            <div className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}>Collection</div>
+
           <button
             className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
             onClick={AllowMinting}
