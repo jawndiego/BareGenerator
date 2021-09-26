@@ -17,7 +17,7 @@ export default function Index({ data }) {
         title="ALGO LITE"
       />
       <JawnSidebar />
-
+      <FrontArt />
     </DAppProvider>
   )
 };

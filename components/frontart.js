@@ -8,12 +8,6 @@ import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
 import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 
-let [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
-  = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
-  const randomIndex = Math.floor(Math.random() * objectList.length);
-  return objectList[randomIndex];;
-})
-
 // Instantiate a loader
 const loader = new GLTFLoader();
 
@@ -121,6 +115,25 @@ const Models = ({ modelsPlain }) => {
   ) : null;
 }
 
+const getRandomObjects = () => {
+  const [ center, left, mirror, right ]
+    = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
+    const randomIndex = Math.floor(Math.random() * objectList.length);
+    return objectList[randomIndex];;
+  })
+
+  return { center, left, mirror, right };
+};
+
+const chooseObjectsFromQuery = (query, randomObjects) => {
+  const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomObjects.center;
+  const leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomObjects.left;
+  const rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomObjects.right;
+  const mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomObjects.mirror;
+
+  return { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain };
+}
+
 
 export function FrontArt({ router }) {
   let query = {};
@@ -137,18 +150,10 @@ export function FrontArt({ router }) {
   const controls = useRef()
   
   const [objects, setObjects] = useState({});
+  const [objectsPlain, setObjectsPlain] = useState({});
 
-  const chooseObjects = query => {
-    const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
-    const leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
-    const rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
-    const mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
-
-    return { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain };
-  }
-
-  const loadAndSetObjects = () => {
-    const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = chooseObjects(query);
+  const loadAndSetObjects = (objects) => {
+    const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = objects;
     Promise.all([hydrateObject(centerObjectPlain), hydrateObject(leftObjectPlain), hydrateObject(rightObjectPlain), hydrateObject(mirrorObjectPlain)]).then(
       ([center, left, right, mirror]) => {
         setObjects({ center, left, right, mirror })
@@ -156,11 +161,19 @@ export function FrontArt({ router }) {
     )
   }
 
-  const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = chooseObjects(query);
+  const selectRandomObjectsAndSetPlain = () => {
+    const randomObjects = getRandomObjects();
+    setObjectsPlain(chooseObjectsFromQuery(query, randomObjects));
+  }
 
   useEffect(() => {
-    loadAndSetObjects(chooseObjects(query));
+    selectRandomObjectsAndSetPlain();
   }, [])
+
+  useEffect(() => {
+    console.log(objectsPlain);
+    objectsPlain.centerObjectPlain && loadAndSetObjects(objectsPlain);
+  }, [objectsPlain])
 
   return (
     <div className="front-page_wrapper">
@@ -172,15 +185,15 @@ export function FrontArt({ router }) {
       >
       <Lights />
       <Suspense fallback={
-          <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
+        objectsPlain.centerObjectPlain ? <LoadingText modelNames={{ center: objectsPlain.centerObjectPlain.name, left: objectsPlain.leftObjectPlain.name, right: objectsPlain.rightObjectPlain.name, mirror: objectsPlain.mirrorObjectPlain.name }} /> : null
       }>
-          <Stage controls={controls} >
-          <Models modelsPlain={{ centerObject: objects.center, leftObject: objects.left, mirrorObject: objects.mirror, rightObject: objects.right }} />
-          </Stage>
+        <Stage controls={controls} >
+        <Models modelsPlain={{ centerObject: objects.center, leftObject: objects.left, mirrorObject: objects.mirror, rightObject: objects.right }} />
+        </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
       </Canvas>
-      <p onClick={loadAndSetObjects}>Refresh</p>
+      <button className="lozenge-button refresh-button" onClick={selectRandomObjectsAndSetPlain}>Refresh</button>
     </div>
   )
 }
