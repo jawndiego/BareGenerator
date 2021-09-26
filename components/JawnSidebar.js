@@ -57,7 +57,7 @@ const JawnSidebar = () => {
           {/* connects wallet */}
           <button
             className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
-            onClick={() => {account ? deactivate() : activateBrowserWallet();}}
+            onClick={activateBrowserWallet}
           >
             Connect
           </button>
@@ -73,15 +73,15 @@ const JawnSidebar = () => {
           </button>
           <div>
             {/* queriestoken balance stuff hard coded  */}
-            {account && <p>Account: {account}</p>}
+            {/* {account && <p>Account: {account}</p>} */}
             {/* {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>} */}
             {/* {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>} */}
             {/* {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>} */}
             {/* required fields to make contract call at mintbase*/}
-            <p onClick={() => setMintingDisabled(!mintingDisabled)}>to Who?</p>
-            <input value={to} onChange={event => setTo(event.target.value)}/>
-            <p>enterURI:</p>
-            <input value={uri} onChange={event => setURI(event.target.value)}/>
+            {/* <p onClick={() => setMintingDisabled(!mintingDisabled)}>to Who?</p> */}
+            {/* <input value={to} onChange={event => setTo(event.target.value)}/> */}
+            {/* <p>enterURI:</p> */}
+            {/* <input value={uri} onChange={event => setURI(event.target.value)}/> */}
           </div>
         </div>
       </div>
