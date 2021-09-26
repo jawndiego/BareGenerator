@@ -8,7 +8,7 @@ import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
 import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 
-const [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
+let [ randomCenterObject, randomLeftObject, randomMirrorObject, randomRightObject ]
   = [centerObjects, leftObjects, mirrorObjects, rightObjects].map(objectList => {
   const randomIndex = Math.floor(Math.random() * objectList.length);
   return objectList[randomIndex];;
@@ -121,6 +121,7 @@ const Models = ({ modelsPlain }) => {
   ) : null;
 }
 
+
 export function FrontArt({ router }) {
   let query = {};
   const { asPath } = router;
@@ -134,39 +135,52 @@ export function FrontArt({ router }) {
     }, {})
   }
   const controls = useRef()
-
-  const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
-  const leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
-  const rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
-  const mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
-
+  
   const [objects, setObjects] = useState({});
 
-  useEffect(() => {
+  const chooseObjects = query => {
+    const centerObjectPlain = query.center ? centerObjects.filter(object => object.name === query.center)[0] : randomCenterObject;
+    const leftObjectPlain = query.left ? leftObjects.filter(object => object.name === query.left)[0]: randomLeftObject;
+    const rightObjectPlain = query.right ? rightObjects.filter(object => object.name === query.right)[0]: randomRightObject;
+    const mirrorObjectPlain = query.mirror ? mirrorObjects.filter(object => object.name === query.mirror)[0]: randomMirrorObject;
+
+    return { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain };
+  }
+
+  const loadAndSetObjects = () => {
+    const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = chooseObjects(query);
     Promise.all([hydrateObject(centerObjectPlain), hydrateObject(leftObjectPlain), hydrateObject(rightObjectPlain), hydrateObject(mirrorObjectPlain)]).then(
       ([center, left, right, mirror]) => {
         setObjects({ center, left, right, mirror })
       }
     )
+  }
+
+  const { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain } = chooseObjects(query);
+
+  useEffect(() => {
+    loadAndSetObjects(chooseObjects(query));
   }, [])
 
   return (
     <div className="front-page_wrapper">
-    <Canvas
+      <Canvas
       dpr={(1,2)}
       camera={{ position: [0, 4, 8], fov: 44.5 }}
       gl={{ alpha: false }}
-    >
+      // style={{border: '1px solid black', width: '500px', height: '500px'}}
+      >
       <Lights />
       <Suspense fallback={
-        <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
+          <LoadingText modelNames={{ center: centerObjectPlain.name, left: leftObjectPlain.name, right: rightObjectPlain.name, mirror: mirrorObjectPlain.name }} />
       }>
-        <Stage controls={controls} >
+          <Stage controls={controls} >
           <Models modelsPlain={{ centerObject: objects.center, leftObject: objects.left, mirrorObject: objects.mirror, rightObject: objects.right }} />
-        </Stage>
+          </Stage>
       </Suspense>
       <OrbitControls ref={controls} />
-    </Canvas>
+      </Canvas>
+      <p onClick={loadAndSetObjects}>Refresh</p>
     </div>
   )
 }

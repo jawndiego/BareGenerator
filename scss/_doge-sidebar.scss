@@ -30,14 +30,25 @@
     grid-row-gap: var(--space-sm);
   }
   &_history-button {
+    width: 100%;
     transition: transform 250ms var(--boing);
     will-change: transform;
-    &:nth-of-type(odd) {
-      transform: rotate(2deg) scale(0.95);
-    }
-    &:nth-of-type(even) {
-      transform: rotate(-2deg) scale(0.95);
-    }
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--black);
+    z-index: 1;
+  }
+  &_button-odd {
+    transform: rotate(2deg) scale(0.95);
+  }
+  &_button-even {
+    transform: rotate(-2deg) scale(0.95);
+  }
+  &_button-disabled {
+    transform: rotate(0deg) scale(0.8);
+    background: var(--light-grey);
+    color: var(--dark-grey);
+    z-index: 0;
   }
   &_intro {
     font-size: 2.25rem;
@@ -119,6 +130,15 @@
   .doge-sidebar {
     &_history-button:hover {
       transform: rotate(-2deg) scale(1);
+      background: var(--blue);
+      color: var(--white);
+    }
+    &_button-disabled:hover {
+      transform: rotate(0deg) scale(0.8);
+      background: var(--white);
+      cursor: auto;
+      background: var(--light-grey);
+      color: var(--dark-grey);
     }
   }
 }

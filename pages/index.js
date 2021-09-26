@@ -18,7 +18,6 @@ export default function Index({ data }) {
       />
       <JawnSidebar />
 
-      
     </DAppProvider>
   )
 };
