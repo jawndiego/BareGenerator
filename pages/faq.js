@@ -4,7 +4,7 @@ import JawnSidebar from '../components/JawnSidebar'
 export default function Index({ data }) {
   return (
     <>
-      <JawnSidebar />
+      <JawnSidebar showMint={false} showHome={true} showFaq={false}  showConnect={false}/>
       <div className="doge-home_wrapper">
         <h1>
           faq

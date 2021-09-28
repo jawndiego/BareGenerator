@@ -7,7 +7,7 @@ import { utils } from 'ethers'
 import { Contract } from '@ethersproject/contracts'
 
 
-const JawnSidebar = () => {
+const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   const { activateBrowserWallet, deactivate, account } = useEthers();
   // connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
   const etherBalance = useEtherBalance(account)
@@ -55,31 +55,38 @@ const JawnSidebar = () => {
       <div className="doge-sidebar_inner">
         <div className="doge-sidebar_title">
           {/* connects wallet */}
-          <button
+          {showHome ? <Link href={'/'}>
+            <div
+              className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
+            >
+              Home
+            </div>
+          </Link> : null }
+          {showConnect ? <button
             className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
             onClick={activateBrowserWallet}
           >
             Connect
-          </button>
+          </button> : null}
           <div
             className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
           >
             Collection
           </div>
-          <button
+          {showMint ? <button
             className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
             onClick={AllowMinting}
             disabled={mintingDisabled}
           >
             Mint
-          </button>
-          <Link href={'faq'}>
+          </button> : null}
+          {showFaq ? <Link href={'faq'}>
             <div
               className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
             >
               FAQ
             </div>
-          </Link>
+          </Link> : null }
           <div>
             {/* queriestoken balance stuff hard coded  */}
             {/* {account && <p>Account: {account}</p>} */}
