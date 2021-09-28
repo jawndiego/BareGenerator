@@ -3,16 +3,20 @@
   }
 
 .front-page_wrapper {
+  width: 95.5vw;
+  height: 95.5vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
 
-        width: 95.5vw;
-        height: 95.5vh;
-    
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+@media (max-width: 800px) {
+  .front-page_wrapper {
+    margin-top: -60px
+  }
+}
       
-      body {
-        background: #f0f0f0;
-      }
+body {
+  background: #f0f0f0;
+}
 

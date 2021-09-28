@@ -161,7 +161,6 @@ a:hover, a:active { text-decoration: none; color:blue }
 }
 
 .refresh-button {
-    padding-bottom: 30rem;
     cursor: pointer;
     color: black;
 }
@@ -174,4 +173,17 @@ a:hover, a:active { text-decoration: none; color:blue }
   display: flex;
   align-content: space-between;
   justify-content: space-between;
+}
+
+.name-text {
+  height: 80px;
+}
+
+@media (max-width: 500px) {
+  .name-text {
+    width: 100vw;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 100%;
+  }
 }
