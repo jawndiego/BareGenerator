@@ -82,26 +82,36 @@ button {
   text-decoration: none!important;
 }
 
+h1 {
+  font-size: 30px;
+  padding-bottom: 15px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 20px;
+  padding-bottom: 6px;
+  font-weight: bold;
+}
+
+p {
+  padding-bottom: 10px;
+}
+
+b {
+  font-weight: bold;
+}
+
+a {text-decoration: none; color:blue;}
+a:visited { text-decoration: none; color:blue; }
+a:hover { text-decoration: none; color:blue; }
+a:focus { text-decoration: none; color:blue; }
+a:hover, a:active { text-decoration: none; color:blue }
+
 * {
   -webkit-overflow-scrolling: touch;
 }
 
-// SCROLLBAR
-*::-webkit-scrollbar {
-  height: 10px;
-  width: 6px;
-  transform: translateX(-2rem);
-}
-*::-webkit-scrollbar-track {
-  background: white;
-}
-*::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 6rem;
-}
-*::-webkit-scrollbar-thumb:hover {
-  background: var(--grey-lt);
-}
 
 // TYPEOGRAPHY
 .text-01 {

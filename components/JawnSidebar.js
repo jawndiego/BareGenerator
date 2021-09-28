@@ -61,9 +61,11 @@ const JawnSidebar = () => {
           >
             Connect
           </button>
-
-            <div className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}>Collection</div>
-
+          <div
+            className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
+          >
+            Collection
+          </div>
           <button
             className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
             onClick={AllowMinting}
@@ -71,6 +73,13 @@ const JawnSidebar = () => {
           >
             Mint
           </button>
+          <Link href={'faq'}>
+            <div
+              className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
+            >
+              FAQ
+            </div>
+          </Link>
           <div>
             {/* queriestoken balance stuff hard coded  */}
             {/* {account && <p>Account: {account}</p>} */}
