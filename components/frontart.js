@@ -1,12 +1,14 @@
-import * as THREE from 'three'
-import Roboto from '../fonts/Roboto.json';
-import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
 import React, {  Suspense, useEffect, useState, useRef } from 'react'
-import { Canvas, useFrame, createPortal } from '@react-three/fiber'
-import { Stage, Sky, useFBO, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { Stage, Sky, OrbitControls } from '@react-three/drei'
 import {CenterModel, MirrorModel, StaticModel} from './models'
 import { withRouter } from 'next/router'
 import { DRACOLoader, GLTFLoader } from 'three-stdlib';
+
+import Lights from './Lights';
+import LoadingText from './LoadingText';
+import MagicMirror from './MagicMirror';
+import { centerObjects, leftObjects, mirrorObjects, rightObjects } from './data/modelData';
 
 // Instantiate a loader
 const loader = new GLTFLoader();
@@ -25,94 +27,12 @@ const hydrateObject = async (object) => {
   geometry = gltf.scene.children[0].geometry;
   scene = gltf.scene;
 
-  gltf.scene; // THREE.Group
-  gltf.scenes; // Array<THREE.Group>
-  gltf.cameras; // Array<THREE.Camera>
-  gltf.asset; // Object
-
   return {
-    geometry,
+    ...object,
     material,
-    position,
-    rotation,
-    scale,
+    geometry,
     scene
   }
-}
-
-function MagicMirror({ children, ...props }) {
-  const cam = useRef()
-  // useFBO creates a WebGL2 buffer for us, it's a helper from the "drei" library
-  const fbo = useFBO()
-  // The is a separate scene that we create, React will portal into that
-  const [scene] = useState(() => new THREE.Scene())
-  // Tie this component into the render-loop
-  useFrame((state) => {
-    // Our portal has its own camera, but we copy the originals world matrix
-    cam.current.matrixWorldInverse.copy(state.camera.matrixWorldInverse)
-    // Then we set the render-target to the buffer that we have created
-    state.gl.setRenderTarget(fbo)
-    // We render the scene into it, using the local camera that is clamped to the planes aspect ratio
-    state.gl.render(scene, cam.current)
-    // And flip the render-target to the default again
-    state.gl.setRenderTarget(null)
-  })
-  return (
-    <>
-      <mesh {...props}>
-        <planeGeometry args={[5, 10]} position={[0,10,10]} />
-        {/* The "mirror" is just a boring plane, but it receives the buffer texture */}
-        <meshBasicMaterial map={fbo.texture} />
-      </mesh>
-      <PerspectiveCamera manual ref={cam} fov={100} aspect={3 / 5} onUpdate={(c) => c.updateProjectionMatrix()} />
-      {/* This is React being awesome, we portal this components children into the separate scene above */}
-      {createPortal(children, scene)}
-    </>
-  )
-}
-
-function Lights() {
-  return (
-    <>
-      <color attach="background" args={['#f0f0f0']} />
-      <ambientLight intensity={3} color="red" />
-      <pointLight intensity={30} position={[2, 30, 10]} color="red" />
-      <pointLight intensity={6} position={[3, 1, 10]} color="blue" />
-      <pointLight intensity={3} position={[3, 10, 30]} color="red" />
-    </>
-  )
-}
-
-function LoadingText({ modelNames }) {
-  const textOptions = {
-    font: new THREE.FontLoader().parse(Roboto),
-    size: .3,
-    height: .12
-  };
-
-  return (
-    <mesh>
-      <textGeometry attach='geometry' args={[`${modelNames.center}\n${modelNames.left}\n${modelNames.right}\n${modelNames.mirror}`, textOptions]} />
-      <meshStandardMaterial attach='material' />
-    </mesh>
-  );
-}
-
-const Models = ({ modelsPlain }) => {
-  const { centerObject, leftObject, rightObject, mirrorObject } = modelsPlain;
-  
-  return (centerObject && leftObject && rightObject && mirrorObject) ? (
-    <>
-      <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
-        <Lights />
-        <Sky sunPosition={[10000, 10, 10000]} />
-        <MirrorModel object={mirrorObject} />
-      </MagicMirror>
-      <StaticModel object={rightObject} />
-      <StaticModel object={leftObject} />
-      <CenterModel object={centerObject} />
-    </>
-  ) : null;
 }
 
 const getRandomObjects = () => {
@@ -134,6 +54,22 @@ const chooseObjectsFromQuery = (query, randomObjects) => {
   return { centerObjectPlain, leftObjectPlain, rightObjectPlain, mirrorObjectPlain };
 }
 
+const Models = ({ modelsPlain }) => {
+  const { centerObject, leftObject, rightObject, mirrorObject } = modelsPlain;
+  
+  return (centerObject && leftObject && rightObject && mirrorObject) ? (
+    <>
+      <MagicMirror position={[-13, 3.5, 0]} rotation={[0, 0, 0]}>
+        <Lights />
+        <Sky sunPosition={[10000, 10, 10000]} />
+        <MirrorModel object={mirrorObject} />
+      </MagicMirror>
+      <StaticModel object={rightObject} />
+      <StaticModel object={leftObject} />
+      <CenterModel object={centerObject} />
+    </>
+  ) : null;
+}
 
 export function FrontArt({ router }) {
   let query = {};
