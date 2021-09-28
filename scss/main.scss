@@ -83,18 +83,19 @@ button {
 }
 
 h1 {
-  font-size: 30px;
-  padding-bottom: 15px;
+  font-size: 60px;
   font-weight: bold;
 }
 
 h2 {
-  font-size: 20px;
-  padding-bottom: 6px;
+  font-size: 28px;
+  padding-bottom: 20px;
+  padding-top: 30px;
   font-weight: bold;
 }
 
 p {
+  font-size: 20px;
   padding-bottom: 10px;
 }
 
@@ -161,5 +162,16 @@ a:hover, a:active { text-decoration: none; color:blue }
 
 .refresh-button {
     padding-bottom: 30rem;
-    padding-left: 15rem;
+    cursor: pointer;
+    color: black;
+}
+
+.black-link {
+  color: black;
+}
+
+.footer {
+  display: flex;
+  align-content: space-between;
+  justify-content: space-between;
 }
