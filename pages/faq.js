@@ -58,11 +58,15 @@ export default function Index({ data }) {
           In the second phase, we will open 1800 for public sale at .1 ETH. This style feels familiar: you can press the mint button to get a random 1/1/2400 from the collection. Any unredeemed prints from the 600 reserve will be made available for public sale. 
         </p>
         <h2>Timeline</h2>
-          <p><b>September 27</b>: Copper FLA begins for 600 ALGLTMSTR</p>
-          <p><b>September 30</b>: FLA ends</p>
-          <p><b>October 1</b>: ALGLTMSTR ↔ Print redemption begins with 600 prints reserved.</p>
-          <p><b>October 2</b>: Public sale of prints begins. 0.1 ETH = 1 print.</p>
-          <p><b>October 8</b>: ALGLTMSTR ↔ Print redemption ends. Unredeemed prints are released to public. Redeemed ALGLTMSTR are redistributed proportionally to ALGLTMSTR holders.</p>
+        <p><b>September 27</b>: Copper FLA begins for 600 ALGLTMSTR</p>
+        <p><b>September 30</b>: FLA ends</p>
+        <p><b>October 1</b>: ALGLTMSTR ↔ Print redemption begins with 600 prints reserved.</p>
+        <p><b>October 2</b>: Public sale of prints begins. 0.1 ETH = 1 print.</p>
+        <p><b>October 8</b>: ALGLTMSTR ↔ Print redemption ends. Unredeemed prints are released to public. Redeemed ALGLTMSTR are redistributed proportionally to ALGLTMSTR holders.</p>
+        <div className="logos-box">
+          <a href="https://twitter.com/elelcasa"><img className="logo-pic" src="el.png" height="50px"/></a>
+          <a href="https://news.feltzine.us/"><img classname="logo-pic" src="felt.png" height="50px"/></a>
+        </div>
       </div>
     </>
   )
