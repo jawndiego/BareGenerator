@@ -11,7 +11,7 @@ export default function Index({ data }) {
         </h1>
         <h2>What is ALGO LITE?</h2>
         <p>
-          ALGO LITE is an NFT project that shows four characters in various combinations. This project consists of one “Master” and 2400 “Prints”.
+          ALGO LITE is an NFT project by <a href="https://twitter.com/jawnciego">Jawn</a> that shows four characters in various combinations. This project consists of one “Master” and 2400 “Prints”.
         </p>
         <h2>What is a master?</h2>
         <p>
