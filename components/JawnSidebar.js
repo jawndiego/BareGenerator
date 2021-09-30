@@ -87,6 +87,13 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
               FAQ
             </div>
           </Link> : null }
+          <Link href={'https://copperlaunch.com/auctions/0x13C7d3B51C304ADD517c40a39D8a85B0cdea605f'}>
+            <div
+              className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button"].join(" ")}
+            >
+              Auction
+            </div>
+          </Link>
           <div>
             {/* queriestoken balance stuff hard coded  */}
             {/* {account && <p>Account: {account}</p>} */}
