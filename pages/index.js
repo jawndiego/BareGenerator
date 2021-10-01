@@ -4,9 +4,9 @@ import JawnSidebar from '../components/JawnSidebar'
 import { ChainId, DAppProvider } from '@usedapp/core'
 
 const config = {
-  readOnlyChainId: ChainId.Mainnet,
+  readOnlyChainId: ChainId.Rinkeby,
   readOnlyUrls: {
-    [ChainId.Mainnet]: 'https://mainnet.infura.io/v3/21acab1ef4fb416387f7391d15f5e0f7',
+    [ChainId.Mainnet]: 'https://rinkeby.infura.io/v3/21acab1ef4fb416387f7391d15f5e0f7',
   },
 }
 
@@ -18,7 +18,7 @@ export default function Index({ data }) {
       />
     <img className="name-text" src="name-text.png" />
       <JawnSidebar showMint={true} showHome={false} showFaq={true} showConnect={true} />
-      <FrontArt />
+      {/* <FrontArt /> */}
     </DAppProvider>
   )
 };

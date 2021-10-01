@@ -8,7 +8,7 @@ import { Contract } from '@ethersproject/contracts'
 
 
 const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
-  const { activateBrowserWallet, deactivate, account } = useEthers();
+  const { activateBrowserWallet, deactivate, account, chainId } = useEthers();
   // connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
   const etherBalance = useEtherBalance(account)
   const LUPE = '0xb48497dabaffe085801c1b063e7e54f50b833784'
@@ -47,6 +47,15 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
       } 
   }
 
+  let walletText = '';
+  if (!account) {
+    walletText = `🟥 No wallet connected`
+  } else if (chainId !== 1) {
+    walletText = `🟥 Switch your network to mainnet`
+  } else {
+    walletText = `🟩 ${account}`
+  }
+
   const [mintingDisabled, setMintingDisabled] = useState(true);
 
   return (   
@@ -54,58 +63,58 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
     <div className="doge-sidebar_wrapper">
       <div className="doge-sidebar_inner">
         <div className="doge-sidebar_title">
-          {/* connects wallet */}
-          {showHome ? <Link href={'/'}>
-            <div
-              className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
-            >
-              Home
-            </div>
-          </Link> : null }
-          {showConnect ? <button
-            className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
-            onClick={activateBrowserWallet}
-          >
-            Connect
-          </button> : null}
+          {walletText}
+        </div>
+        {showHome ? <Link href={'/'}>
           <div
-            className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
+            className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
           >
-            Collection
+            Home
           </div>
-          {showMint ? <button
-            className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
-            onClick={AllowMinting}
-            disabled={mintingDisabled}
+        </Link> : null }
+        {showConnect ? <button
+          className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
+          onClick={activateBrowserWallet}
+        >
+          Connect
+        </button> : null}
+        <div
+          className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
+        >
+          Collection
+        </div>
+        {showMint ? <button
+          className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button", mintingDisabled && "doge-sidebar_button-disabled"].join(" ")}
+          onClick={AllowMinting}
+          disabled={mintingDisabled}
+        >
+          Mint
+        </button> : null}
+        {showFaq ? <Link href={'faq'}>
+          <div
+            className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
           >
-            Mint
-          </button> : null}
-          {showFaq ? <Link href={'faq'}>
-            <div
-              className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
-            >
-              FAQ
-            </div>
-          </Link> : null }
-          <Link href={'https://copperlaunch.com/auctions/0x13C7d3B51C304ADD517c40a39D8a85B0cdea605f'}>
-            <div
-              className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button"].join(" ")}
-            >
-              Auction
-            </div>
-          </Link>
-          <div>
-            {/* queriestoken balance stuff hard coded  */}
-            {/* {account && <p>Account: {account}</p>} */}
-            {/* {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>} */}
-            {/* {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>} */}
-            {/* {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>} */}
-            {/* required fields to make contract call at mintbase*/}
-            {/* <p onClick={() => setMintingDisabled(!mintingDisabled)}>to Who?</p> */}
-            {/* <input value={to} onChange={event => setTo(event.target.value)}/> */}
-            {/* <p>enterURI:</p> */}
-            {/* <input value={uri} onChange={event => setURI(event.target.value)}/> */}
+            FAQ
           </div>
+        </Link> : null }
+        <Link href={'https://copperlaunch.com/auctions/0x13C7d3B51C304ADD517c40a39D8a85B0cdea605f'}>
+          <div
+            className={["lozenge-button", "doge-sidebar_button-odd", "doge-sidebar_history-button"].join(" ")}
+          >
+            Auction
+          </div>
+        </Link>
+        <div>
+          {/* queriestoken balance stuff hard coded  */}
+          {/* {account && <p>Account: {account}</p>} */}
+          {/* {etherBalance && <p>Balance: {formatEther(etherBalance)} ETH</p>} */}
+          {/* {tokenBalanceJAWN && <p>Balance: {formatUnits(tokenBalanceJAWN, 0)} JAWN</p>} */}
+          {/* {tokenBalanceLUPE && <p>Balance: {formatUnits(tokenBalanceLUPE, 18)} LUPE</p>} */}
+          {/* required fields to make contract call at mintbase*/}
+          {/* <p onClick={() => setMintingDisabled(!mintingDisabled)}>to Who?</p> */}
+          {/* <input value={to} onChange={event => setTo(event.target.value)}/> */}
+          {/* <p>enterURI:</p> */}
+          {/* <input value={uri} onChange={event => setURI(event.target.value)}/> */}
         </div>
       </div>
     </div>

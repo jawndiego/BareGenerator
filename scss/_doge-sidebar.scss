@@ -17,8 +17,12 @@
   }
   &_title {
     width: 100%;
-    text-align: center;
+    text-align: right;
     padding-top: 1rem;
+    padding-bottom: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     h1 {
       transform: rotate(-1deg);
     }
