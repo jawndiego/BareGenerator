@@ -14,12 +14,12 @@ const CONTRACTS_RINKEBY = {
 }
 
 const CONTRACTS_MAINNET = {
-  SALES: '0xc5813EaC417Cb46C93D2C57B9935593e6b010b83',
+  SALES: '0xa051e1117c6942c94cad161cfab8fae37757783f',
   ALGLTMSTR: '0xfd8d7dbecd5c083dde2b828f96be5d16d1188235'
 }
 
 const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
-  const Contracts = CONTRACTS_RINKEBY;
+  const Contracts = CONTRACTS_MAINNET;
   const { activateBrowserWallet, deactivate, account, chainId , library} = useEthers();
   // connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
   const etherBalance = useEtherBalance(account) / (10**18);
@@ -55,13 +55,20 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
     walletText = `🟩 ${account}`
   }
 
-  const fetchSalesInfo = async () => {
-    if (salesInfo) {
-      return;
+  
+  useEffect(() => {
+    const fetchSalesInfo = async () => {
+      if (salesInfo) {
+        return;
+      }
+      try {
+        const [numberPublicSale, numberSoldPublic, numberPrivateSale, numberSoldPrivate] = (await salesContract.saleInfo()).map(Number);
+        setSalesInfo({numberPublicSale, numberSoldPublic, numberPrivateSale, numberSoldPrivate})
+      } catch {
+      }  
     }
-    const [numberPublicSale, numberSoldPublic, numberPrivateSale, numberSoldPrivate] = (await salesContract.saleInfo()).map(Number);
-    setSalesInfo({numberPublicSale, numberSoldPublic, numberPrivateSale, numberSoldPrivate})
-  }
+    fetchSalesInfo();
+  }, [algltmstrContract])
   
   const handleMintButtonClick = async () => {
     if (algltMasterMode) {
@@ -80,10 +87,10 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   }
 
   const mintingDisabled = busy || !salesInfo || salesInfo.numberSoldPrivate >= salesInfo.numberPrivateSale;
-
+console.log(salesInfo);
 
   return (   
-    <div onMouseEnter={fetchSalesInfo} onTouchStart={fetchSalesInfo} className="doge-sidebar_wrapper">
+    <div className="doge-sidebar_wrapper">
       <div className="doge-sidebar_inner">
         <div className="doge-sidebar_title">
           {walletText}
