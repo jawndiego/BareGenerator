@@ -200,3 +200,31 @@ a:hover, a:active { text-decoration: none; color:blue }
     height: 100%;
   }
 }
+
+.token-button {
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--black);
+  z-index: 1;
+  height: 4rem;
+  filter: var(--sm-shadow);
+}
+
+.token-button-disabled {
+  background: var(--light-grey);
+  color: var(--dark-grey);
+}
+
+.token-button-selected {
+  filter: var(--black-shadow)
+}
+
+.error-text {
+  color: red;
+}
+
+.button-disabled {
+  background: var(--light-grey);
+  color: var(--dark-grey);
+  z-index: 0;
+}
