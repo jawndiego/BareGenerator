@@ -18,7 +18,7 @@ export default function Index({ data }) {
       />
     <img className="name-text" src="name-text.png" />
       <JawnSidebar showMint={true} showHome={false} showFaq={true} showConnect={true} />
-      {/* <FrontArt /> */}
+      <FrontArt />
     </DAppProvider>
   )
 };
