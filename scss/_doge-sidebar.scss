@@ -48,12 +48,6 @@
   &_button-even {
     transform: rotate(-2deg) scale(0.95);
   }
-  &_button-disabled {
-    transform: rotate(0deg) scale(0.8);
-    background: var(--light-grey);
-    color: var(--dark-grey);
-    z-index: 0;
-  }
   &_intro {
     font-size: 2.25rem;
     padding: 1.5rem 0 0;
@@ -63,12 +57,50 @@
     line-height: 1.25;
     padding-bottom: 1rem;
   }
+  &_divider {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  &_input-wrapper {
+    font-size: 2rem;
+    white-space: nowrap;
+    width: 75%;
+    display: inherit;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+  &_input {
+    font-size: inherit;
+    width: inherit;
+    border-radius: 1rem;
+    max-width: 25%;
+    text-align: center;
+  }
+  &_token-choose {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+  &_mint-button {
+    background-color: var(--white);
+    transform: none;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    width: auto;
+  }
 }
 
 @media(--sm) {
   .doge-sidebar {
     &_wrapper {
       padding: var(--space-lg) var(--space-lg) 0;
+    }
+    &_input {
+      max-width: 15%
     }
   }
 }
@@ -77,6 +109,9 @@
   .doge-sidebar {
     &_wrapper {
       padding: var(--space-lg) calc(var(--space-lg) * 2) 0;
+    }
+    &_input {
+      max-width: 15%
     }
   }
 }
@@ -109,7 +144,7 @@
     &_inner {
       position: relative;
       filter: var(--black-shadow);
-    } 
+    }
   }
 }
 
@@ -136,6 +171,9 @@
       transform: rotate(-2deg) scale(1);
       background: var(--blue);
       color: var(--white);
+    }
+    &_mint-button:hover {
+      transform: none;
     }
     &_button-disabled:hover {
       transform: rotate(0deg) scale(0.8);
