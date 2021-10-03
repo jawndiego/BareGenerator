@@ -4,6 +4,9 @@ import JawnSidebar from '../components/JawnSidebar'
 import { ChainId, DAppProvider } from '@usedapp/core'
 
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { InjectedConnector } from '@web3-react/injected-connector'
+
+const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
 const config = {
   readOnlyChainId: ChainId.Rinkeby,
@@ -34,7 +37,7 @@ export default function Index({ data }) {
         title="ALGO LITE"
       />
     <img className="name-text" src="name-text.png" />
-      <JawnSidebar walletConnect={walletConnect} showMint={true} showHome={false} showFaq={true} showConnect={true} />
+      <JawnSidebar connectors={{walletConnect, injected}} showMint={true} showHome={false} showFaq={true} showConnect={true} />
       <FrontArt />
     </DAppProvider>
   )

@@ -7,9 +7,6 @@ import * as ethers from 'ethers'
 import { Contract } from '@ethersproject/contracts'
 import salesAbi from './abis/algolite-sale';
 import algltlmstrAbi from './abis/algltmstr';
-import { InjectedConnector } from '@web3-react/injected-connector'
-
-const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
 const CONTRACTS_RINKEBY = {
   SALES: '0xfdD3f7140FEb3759385b7603844aeE2cA0042295',
@@ -23,7 +20,7 @@ const CONTRACTS_MAINNET = {
 
 
 
-const JawnSidebar = ({walletConnect, showConnect, showHome, showFaq, showMint}) => {
+const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => {
   const Contracts = CONTRACTS_MAINNET;
   const { activateBrowserWallet, activate, deactivate, account, chainId , library} = useEthers();
   // connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
@@ -64,9 +61,9 @@ const JawnSidebar = ({walletConnect, showConnect, showHome, showFaq, showMint}) 
   const connectToWallet = () => {
     // this could be any wallet
     if (isMobile) {
-      activate(walletConnect);
+      activate(connectors.walletConnect);
     } else {
-      activate(injected); 
+      activate(connectors.injected); 
     }
   }
 
