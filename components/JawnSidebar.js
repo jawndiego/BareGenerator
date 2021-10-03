@@ -108,7 +108,14 @@ const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => 
     }
   }
 
-  const mintingDisabled = busy || !salesInfo || salesInfo.numberSoldPrivate >= salesInfo.numberPrivateSale;
+  const algltmstrSalesOpen = salesInfo && salesInfo.numberPrivateSale < salesInfo.numberSoldPrivate;
+  const ethSalesOpen = salesInfo && salesInfo.numberPublicSale < salesInfo.numberSoldPublic;
+  const mintingDisabled = (
+    busy ||
+    !salesInfo ||
+    (algltMasterMode && algltmstrSalesOpen) ||
+    (!algltMasterMode && ethSalesOpen)
+  );
 
   return (   
     <div className="doge-sidebar_wrapper">
@@ -151,11 +158,12 @@ const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => 
         <hr className="doge-sidebar_divider" />
         <div className="doge-sidebar_token-choose">
           <button className={["lozenge-button", "token-button", algltMasterMode && "token-button-selected"].join(" ")} onClick={() => setMintingToken('ALGLTMSTR')}>ALGLTMSTR</button>
-          <button disabled className={["lozenge-button", "token-button", !algltMasterMode && "token-button-selected", "token-button-disabled"].join(" ")} onClick={() => setMintingToken('ETH')}>ETH</button>
+          <button disabled={!ethSalesOpen} className={["lozenge-button", "token-button", !algltMasterMode && "token-button-selected", !ethSalesOpen && "token-button-disabled"].join(" ")} onClick={() => setMintingToken('ETH')}>ETH</button>
         </div>
         <div className="doge-sidebar_input-wrapper">
           {algltMasterMode ? [<div>{`quantity:`}</div>, <input type="number" min="1" max={tokenBalanceALGLTMSTR || 0} step="1" className="doge-sidebar_input" value={quantity} onChange={event => setQuantity(event.target.value)} />] : null}
         </div>
+        {algltMasterMode ? <div>{`cost: ${1} algltmstr`}</div> : <div>{`cost: ${0.1} eth`}</div>}
         {tokenBalanceALGLTMSTR < quantity ? <div className="error-text">
           ALGLTMSTR balance is too low
         </div> : null}
