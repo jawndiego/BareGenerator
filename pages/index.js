@@ -8,15 +8,17 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 
 const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] })
 
-const config = {
-  readOnlyChainId: ChainId.Mainnet,
-  readOnlyUrls: {
-    [ChainId.Mainnet]: 'https://mainnet.infura.io/v3/21acab1ef4fb416387f7391d15f5e0f7',
-  },
-}
+// const config = {
+//   readOnlyChainId: ChainId.Mainnet,
+//   readOnlyUrls: {
+//     [ChainId.Mainnet]: 'https://mainnet.infura.io/v3/21acab1ef4fb416387f7391d15f5e0f7',
+//   },
+// }
 
 const walletConnect = new WalletConnectConnector({
-  rpc: config,
+  rpc: {
+    [ChainId.Mainnet]: 'https://mainnet.infura.io/v3/21acab1ef4fb416387f7391d15f5e0f7',
+  },
   qrcode: true,
   qrcodeModalOptions: {
     mobileLinks: [
