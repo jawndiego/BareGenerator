@@ -100,7 +100,7 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
       purchaseWithALGLTFunction.send(quantity, { gasLimit: ethers.utils.hexlify(240000 + quantity * 80000) })
       setBusy(false);
     } else {
-      purchaseWithETHFunction.send({value: ethers.utils.parseEther('0.1')});
+      purchaseWithETHFunction.send({value: ethers.utils.parseEther('0.1'), gasLimit: ethers.utils.hexlify(210000) });
     }
   }
 
