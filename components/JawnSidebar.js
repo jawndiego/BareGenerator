@@ -110,7 +110,9 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
     busy ||
     !salesInfo ||
     (algltMasterMode && algltmstrSalesOpen) ||
-    (!algltMasterMode && ethSalesOpen)
+    (!algltMasterMode && ethSalesOpen) ||
+    (algltMasterMode && tokenBalanceALGLTMSTR < quantity) ||
+    (!algltMasterMode && etherBalance < 0.1)
   );
 
   return (   
