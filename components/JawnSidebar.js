@@ -177,7 +177,7 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
           tokenBalanceALGLTMSTR < quantity ? <div className="error-text">ALGLTMSTR balance is too low</div> : null
         ) : (
           etherBalance < 0.1 ? <div className="error-text">ETH balance is too low</div> : null
-        )
+        )}
         {showMint ? <button
           className={["lozenge-button", !mintingDisabled && "doge-sidebar_history-button", "doge-sidebar_mint-button", mintingDisabled && "button-disabled"].join(" ")}
           onClick={handleMintButtonClick}
