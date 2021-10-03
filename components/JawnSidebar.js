@@ -109,8 +109,8 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   const mintingDisabled = (
     busy ||
     !salesInfo ||
-    (algltMasterMode && algltmstrSalesOpen) ||
-    (!algltMasterMode && ethSalesOpen) ||
+    (algltMasterMode && !algltmstrSalesOpen) ||
+    (!algltMasterMode && !ethSalesOpen) ||
     (algltMasterMode && tokenBalanceALGLTMSTR < quantity) ||
     (!algltMasterMode && etherBalance < 0.1)
   );
