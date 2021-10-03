@@ -7,6 +7,7 @@ import * as ethers from 'ethers'
 import { Contract } from '@ethersproject/contracts'
 import salesAbi from './abis/algolite-sale';
 import algltlmstrAbi from './abis/algltmstr';
+import connectors from '../utils/connectors';
 
 const CONTRACTS_RINKEBY = {
   SALES: '0xfdD3f7140FEb3759385b7603844aeE2cA0042295',
@@ -19,8 +20,7 @@ const CONTRACTS_MAINNET = {
 }
 
 
-
-const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => {
+const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   const Contracts = CONTRACTS_MAINNET;
   const { activateBrowserWallet, activate, deactivate, account, chainId , library} = useEthers();
   // connected wallet balance for ETH, JAWN (erc721), and LUPE(erc20) balances
@@ -48,6 +48,7 @@ const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => 
   const [quantity, setQuantity] = useState(1);
   const [salesInfo, setSalesInfo] = useState();
   const [isMobile, setIsMobile] = useState();
+  const [showConnectors, setShowConnectors] = useState(false);
 
   let walletText = '';
   if (!account) {
@@ -58,13 +59,8 @@ const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => 
     walletText = `🟩 ${account}`
   }
 
-  const connectToWallet = () => {
-    // this could be any wallet
-    if (isMobile) {
-      activate(connectors.walletConnect);
-    } else {
-      activate(connectors.injected); 
-    }
+  const connectToWallet = (connector) => {
+    activate(connectors[connector])
   }
 
   useEffect(() => {
@@ -130,12 +126,23 @@ const JawnSidebar = ({connectors, showConnect, showHome, showFaq, showMint}) => 
             Home
           </div>
         </Link> : null }
-        {showConnect ? <button
-          className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
-          onClick={connectToWallet}
-        >
-          Connect
-        </button> : null}
+        {showConnect ? 
+          (!showConnectors ? (
+            <button
+              className="lozenge-button doge-sidebar_button-odd doge-sidebar_history-button"
+              onClick={() => setShowConnectors(true)}
+            >
+              Connect
+            </button>
+          ) : (
+            <div className="doge-sidebar_wallet-choose">
+              <button className={["lozenge-button", "token-button"].join(" ")} onClick={() => connectToWallet('injected')}>Injected (Metamask, etc)</button>
+              <button className={["lozenge-button", "token-button"].join(" ")} onClick={() => connectToWallet('walletConnect')}>WalletConnect</button>
+              <button className={["lozenge-button", "token-button"].join(" ")} onClick={() => connectToWallet('ledger')}>Ledger</button>
+              <button className={["lozenge-button", "token-button"].join(" ")} onClick={() => connectToWallet('trezor')}>Trezor</button>
+            </div>
+          ))
+        : null }
         {/* <div
           className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button", "doge-sidebar_button-disabled"].join(" ")}
         >
