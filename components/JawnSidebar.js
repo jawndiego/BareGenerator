@@ -185,9 +185,15 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
         >
           {busy ? `Approving...` : `Mint`}
         </button> : null}
-        {salesInfo ? <div>
-          {`${salesInfo.numberSoldPrivate} / ${salesInfo.numberPrivateSale} sold via ALGLT redemption`}
-        </div> : null}
+        {algltMasterMode ? (
+          salesInfo ? <div>
+            {`${salesInfo.numberSoldPrivate} / ${salesInfo.numberPrivateSale} sold via ALGLT redemption`}
+          </div> : null
+        ) : (
+          salesInfo ? <div>
+            {`${salesInfo.numberSoldPublic} / ${salesInfo.numberPublicSale} sold via ETH purchase`}
+          </div> : null
+        )}
         <div>
           {algltMasterMode ? `balance: ${tokenBalanceALGLTMSTR} ALGLTMSTR` : `Balance: ${etherBalance} ETH`}
         </div>
