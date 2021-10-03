@@ -104,8 +104,8 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
     }
   }
 
-  const algltmstrSalesOpen = salesInfo && salesInfo.numberPrivateSale < salesInfo.numberSoldPrivate;
-  const ethSalesOpen = salesInfo && salesInfo.numberPublicSale < salesInfo.numberSoldPublic;
+  const algltmstrSalesOpen = salesInfo && salesInfo.numberSoldPrivate < salesInfo.numberPrivateSale;
+  const ethSalesOpen = salesInfo && salesInfo.numberSoldPublic < salesInfo.numberPublicSale;
   const mintingDisabled = (
     busy ||
     !salesInfo ||
