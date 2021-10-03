@@ -173,9 +173,11 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
           {algltMasterMode ? [<div>{`quantity:`}</div>, <input type="number" min="1" max={tokenBalanceALGLTMSTR || 0} step="1" className="doge-sidebar_input" value={quantity} onChange={event => setQuantity(event.target.value)} />] : null}
         </div>
         {algltMasterMode ? <div>{`cost: ${1} algltmstr`}</div> : <div>{`cost: ${0.1} eth`}</div>}
-        {tokenBalanceALGLTMSTR < quantity ? <div className="error-text">
-          ALGLTMSTR balance is too low
-        </div> : null}
+        {algltMasterMode ? (
+          tokenBalanceALGLTMSTR < quantity ? <div className="error-text">ALGLTMSTR balance is too low</div> : null
+        ) : (
+          etherBalance < 0.1 ? <div className="error-text">ETH balance is too low</div> : null
+        )
         {showMint ? <button
           className={["lozenge-button", !mintingDisabled && "doge-sidebar_history-button", "doge-sidebar_mint-button", mintingDisabled && "button-disabled"].join(" ")}
           onClick={handleMintButtonClick}
