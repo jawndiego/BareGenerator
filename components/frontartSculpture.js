@@ -1,110 +1,103 @@
 
-import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 import { React, Suspense, useRef, useState, useMemo } from 'react'
-import { useGLTF, OrbitControls, rotation, ContactShadows, CameraShake } from '@react-three/drei'
-// import { DRACOLoader, GLTFLoader } from 'three-stdlib';
-
-// const loader = new GLTFLoader();
-// const dracoLoader = new DRACOLoader();
-// dracoLoader.setDecoderPath( './' );
-// loader.setDRACOLoader( dracoLoader );
 
 
-function Model(props) {
-  const group = useRef()
-  const { nodes, materials } = useGLTF('/about-pictures/JUGSYJINNS.glb')
+
+// function Model(props) {
+//   const group = useRef()
+//   const { nodes, materials } = useGLTF('/about-pictures/JUGSYJINNS.glb')
 
 
-//   return {
-//     ...object,
-//     material,
-//     geometry,
-//     scene
-//   }
+// //   return {
+// //     ...object,
+// //     material,
+// //     geometry,
+// //     scene
+// //   }
+// // }
+// return (
+//   <group ref={group} {...props} dispose={null}>
+//     <group
+//       position={[0.25, 0.48, -0.04]}
+//       rotation={[2.3, 1.19, -0.89]}
+//       scale={[2.15, 2.15, 2.15]}
+//     >
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_1.geometry}
+//         material={materials["colorchart.004"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_2.geometry}
+//         material={materials.money}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_3.geometry}
+//         material={materials.wire_135110008}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_4.geometry}
+//         material={materials.Bottom}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_5.geometry}
+//         material={materials["Material.001"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_6.geometry}
+//         material={materials["colorchart.001"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_7.geometry}
+//         material={materials.Standard737373}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_8.geometry}
+//         material={materials["colorchart.002"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_9.geometry}
+//         material={materials["Cactus.001"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_10.geometry}
+//         material={materials["anime-blush-clip-art-png-17"]}
+//       />
+//       <mesh
+//         castShadow
+//         receiveShadow
+//         geometry={nodes.star_11.geometry}
+//         material={materials.texture_0}
+//       />
+//     </group>
+//   </group>
+// );
 // }
-return (
-  <group ref={group} {...props} dispose={null}>
-    <group
-      position={[0.25, 0.48, -0.04]}
-      rotation={[2.3, 1.19, -0.89]}
-      scale={[2.15, 2.15, 2.15]}
-    >
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_1.geometry}
-        material={materials["colorchart.004"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_2.geometry}
-        material={materials.money}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_3.geometry}
-        material={materials.wire_135110008}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_4.geometry}
-        material={materials.Bottom}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_5.geometry}
-        material={materials["Material.001"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_6.geometry}
-        material={materials["colorchart.001"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_7.geometry}
-        material={materials.Standard737373}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_8.geometry}
-        material={materials["colorchart.002"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_9.geometry}
-        material={materials["Cactus.001"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_10.geometry}
-        material={materials["anime-blush-clip-art-png-17"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_11.geometry}
-        material={materials.texture_0}
-      />
-    </group>
-  </group>
-);
-}
 // useGLTF.preload('/about-pictures/JUGSYJINNS.glb')
 
 const JawnHead = () => {
 
 
-  const controls = useRef()
+  // const controls = useRef()
   return (
     <div className="front-page_wrapper">
        <div className='doge-bg'>
@@ -121,7 +114,7 @@ const JawnHead = () => {
    </div>
    <div >
    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<model-viewer class="front-page_wrapper" bounds="tight" enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" exposure="0.51"  camera-orbit="-251.6deg 79.88deg auto">
+<model-viewer class="front-page_wrapper" poster="./poster.webp" bounds="tight" enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" exposure="0.51"  camera-orbit="-251.6deg 79.88deg auto">
 
 </model-viewer>
 
