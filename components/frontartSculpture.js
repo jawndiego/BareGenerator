@@ -98,7 +98,7 @@ const JawnHead = () => {
     <h1>cast: bread, heem, sadflower, star, snake</h1> 
    <h1></h1>
    <h1>object descriptions:</h1>
-   <h1>lot 38, scanned folk art society jug, acquired at Ledbetter Auctions sometime in March 2020 in gibsonville, nc. </h1>
+   <h1>lot 38, scanned folk art society jug, acquired at Ledbetter Auctions sometime on March 19, 2022 in gibsonville, nc. </h1>
    <h1>jug signed at the bottom of piece s.o BH (look)</h1>
    <h1>de quien son las [x] que viven afuera del firmamento?</h1>
    <h1>o ➝ 0</h1>
