@@ -1,4 +1,4 @@
-export const NETWORK_ID: string = process.env.NEXT_PUBLIC_NETWORK_ID!;
+export const NETWORK_ID: string ='1';
 if (!NETWORK_ID) {
   throw new Error("NetworkID is required");
 }
