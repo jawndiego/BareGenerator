@@ -119,11 +119,25 @@ const JawnHead = () => {
    <h1>o ➝ 0</h1>
    <h1>contextualizado por jawn diego reyes</h1>
    </div>
-   <div div className="jawn-page" ><script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<model-viewer enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" shadow-intensity="1" camera-orbit="99.65deg 75deg auto">
+      <Canvas
+      dpr={(1,2)}
+      camera={{ position: [20, 5, -4], fov: 44.5 }}
+      gl={{ alpha: true }}
+      // style={{border: '1px solid black', width: '500px', height: '500px'}}
+      >
+        <pointLight position={[10, 10, 10]} />
+        <ambientLight args={['red']} position={[1, 0, 10]}  intensity={0.2} />
+        <ambientLight position={[1, -4, 5]}  intensity={0.5} />
+        <ambientLight position={[1, 5, 5]}  intensity={0.25} />
+        <spotLight position={[0, 0, -1]}intensity={.3}  />
+        {/* <spotLight position={[0, 5, -1]}intensity={1.2}  /> */}
+        <ContactShadows />
+        <Suspense fallback={null}>
+        {/* <Preload /> */}
+        </Suspense>
+        <OrbitControls ref={controls} />
 
-</model-viewer></div>
-
+          </Canvas>
 
     </div>
   )

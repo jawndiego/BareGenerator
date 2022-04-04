@@ -6,6 +6,8 @@ import JawnAuctionSidebarTester from '../components/JawnAuctionSideBarTester'
 import FrontartSculpture from '../components/frontartSculpture'
 
 
+
+
 export default function Index({ data }) {
   return (
     <Web3ConfigProvider
@@ -14,7 +16,6 @@ export default function Index({ data }) {
   >
       <Head/>
       <JawnAuctionSidebarTester showConnect={true} />
-      {/* <JawnAuctionSidebar /> */}
       <FrontartSculpture />
       <JawnFooter/>
     </Web3ConfigProvider>
