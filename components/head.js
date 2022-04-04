@@ -8,7 +8,7 @@ const defaultOGImage = 'https://jawn.fr/og-image.png';
 const Head = (props) => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>{`${props.title} | Jawn  ` || ''}</title>
+    <title>JDR-1 | Jawn </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicons/favicon.png" />
     {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
