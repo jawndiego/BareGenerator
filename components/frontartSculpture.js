@@ -114,7 +114,7 @@ const JawnHead = () => {
    </div>
    <div >
    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<model-viewer class="front-page_wrapper" poster="./poster.webp" bounds="tight" enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" exposure="0.51"  camera-orbit="-251.6deg 79.88deg auto">
+<model-viewer class="front-page_wrapper" poster="./poster.webp" bounds="tight" enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" shadow-intensity="1" exposure="0.51"  camera-orbit="-251.6deg 79.88deg auto">
 
 </model-viewer>
 
