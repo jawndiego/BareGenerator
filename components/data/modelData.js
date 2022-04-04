@@ -67,87 +67,13 @@ export const mirrorObjects = [
 
 export const centerObjects = [
   {
-    name: 'plant',
-    pathname: 'planta',
-    materialName: 'Cactus',
-    position: [-12.5, 3.75, 6],
-    scale: [4.2, 4.2, 4.2],
-    rotation: [1.8, 0, 0.55]
-  },
-  {
-    name: 'nopal',
-    pathname: 'nopal',
-    materialName: 'Cactus',
-    position: [-14.5, 0, 6],
-    scale: [.16, .16, .16],
-    rotation: [0, 3, 0.55]
-  },
-  {
-    name: 'flowerboy',
-    pathname: 'flowerboy',
-    materialName: 'colorchart',
-    position: [-12.5, 2.5, 5],
-    scale: [10, 10, 10],
-    rotation: [1.6, -.5, 3]
-  },
-   {
-    name: 'pup',
-    pathname: 'pup',
-    materialName: 'colorchart',
-    position: [-11.5, 2.4, 8],
-    scale: [10, 10, 10],
-    rotation: [1, .5, -1]
-  },
- {
-    name: 'sadflower',
-    pathname: 'sadflower',
-    materialName: 'colorchart',
-    position: [-12.8, 3, 5],
-    scale: [12, 12, 12],
-    rotation: [1.5, 2.4, 1]
-  },
-  {
-    name: 'star',
-    pathname: 'star',
-    materialName: 'colorchart',
-    position: [-12, 5, -.5],
-    scale: [60, 60, 60],
-    rotation: [0, 3, 0.55]
-  },
-  {
-    name: 'boxcactus',
-    pathname: 'boxcactus',
-    materialName: 'boxcactus',
-    position: [-12.5, 5, 6],
-    scale: [8, 8, 8],
-    rotation: [0, 0, 0]
-  },
-  {
-    name: 'florebus',
-    pathname: 'florebus',
-    materialName: 'BoxCactus',
-    position: [-12, 3, 6],
-    scale: [6, 6, 6],
-    rotation: [1.8, .3, .4],
-  },
-  {
-    name: 'sticky',
-    pathname: 'sticky',
-    materialName: 'StandardFF3300',
-    position: [-12, 3, 6],
-    scale: [6, 6, 6],
-    rotation: [0.92, 0, 0.28],
-  },
-  {
-    name: 'snake',
-    pathname: 'snake',
-    materialName: 'colorchart',
-    position: [-12, -3, 6],
-    scale: [6, 6, 6],
-    rotation: [1.9, 0, 0],
-  }
- 
-];
+    name: 'group_0',
+    pathname: 'JUGSYJINNS',
+    materialName: 'texture_0',
+    position: [0, 0.45, 0], 
+    scale: [.36, .36, .36],
+    rotation: [2, 0, 0]
+  }];
 
 export const rightObjects = [
   {
@@ -245,4 +171,14 @@ export const leftObjects = [
     scale: [.36, .36, .36],
     rotation: [.5, .5, 3]
   }
-]
+];
+
+export const ObjectOfDesire = [
+  {
+    name: 'group_0',
+    pathname: 'JUGSYJINNS',
+    materialName: 'texture_0',
+    position: [0, 0.45, 0], 
+    scale: [.36, .36, .36],
+    rotation: [2, 0, 0]
+  }];

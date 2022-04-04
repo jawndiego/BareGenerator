@@ -129,7 +129,7 @@ export function FrontArt({ router }) {
       </Suspense>
       <OrbitControls ref={controls} />
       </Canvas>
-      <button className="lozenge-button refresh-button" onClick={selectRandomObjectsAndSetPlain}>Shuffle</button>
+      {/* <button className="lozenge-button refresh-button" onClick={selectRandomObjectsAndSetPlain}>Shuffle</button> */}
     </div>
   )
 }

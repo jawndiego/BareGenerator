@@ -43,10 +43,11 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   // disables mint button
   const [busy, setBusy] = useState(false)
 
-  const [mintingToken, setMintingToken] = useState('ETH');
+
   const algltMasterMode = mintingToken === 'ALGLTMSTR';
   const [quantity, setQuantity] = useState(1);
   const [salesInfo, setSalesInfo] = useState();
+  const [mintingToken, setMintingToken] = useState('ETH');
   const [isMobile, setIsMobile] = useState();
   const [showConnectors, setShowConnectors] = useState(false);
 

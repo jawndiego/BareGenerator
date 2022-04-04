@@ -1,17 +1,22 @@
 import Head from '../components/head'
-import FrontArt from '../components/frontart'
-import JawnSidebar from '../components/JawnSidebar'
-import { DAppProvider } from '@usedapp/core'
+import JawnFooter from '../components/Jawn-footer'
+import { Web3ConfigProvider } from '@zoralabs/simple-wallet-provider'
+import { NETWORK_ID, RPC_URL } from '../utils/env-vars.ts'
+import JawnAuctionSidebarTester from '../components/JawnAuctionSideBarTester'
+import FrontartSculpture from '../components/frontartSculpture'
+
 
 export default function Index({ data }) {
   return (
-    <DAppProvider>
-      <Head
-        title="ALGO LITE"
-      />
-    <img className="name-text" src="name-text.png" />
-      <JawnSidebar showMint={true} showHome={false} showFaq={true} showConnect={true} />
-      <FrontArt />
-    </DAppProvider>
+    <Web3ConfigProvider
+    networkId={parseInt(NETWORK_ID)}
+    rpcUrl= "https://mainnet.infura.io/v3/040b908244e941b3b051d60b1e2c9f0c"
+  >
+      <Head/>
+      <JawnAuctionSidebarTester showConnect={true} />
+      {/* <JawnAuctionSidebar /> */}
+      <FrontartSculpture />
+      <JawnFooter/>
+    </Web3ConfigProvider>
   )
 };

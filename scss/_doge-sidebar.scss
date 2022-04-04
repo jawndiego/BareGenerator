@@ -1,4 +1,9 @@
 .doge-sidebar {
+  &_outside {
+    position: bottom;
+    padding: var(--space-sm) var(--space-sm) 0;
+    z-index: 100;
+  }
   &_wrapper {
     position: relative;
     padding: var(--space-sm) var(--space-sm) 0;
