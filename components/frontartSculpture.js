@@ -119,10 +119,12 @@ const JawnHead = () => {
    <h1>o ➝ 0</h1>
    <h1>contextualizado por jawn diego reyes</h1>
    </div>
-   <div className="jawn-page" ><script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<model-viewer className="jawn-page" enable-pan src="./about-pictures/JUGSYJINNS.glb" camera-controls environment-image="neutral" shadow-intensity="1" camera-orbit="99.65deg 75deg auto">
+   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+   <div>
+<center>
+<model-viewer  class="doge-bg" enable-pan src="./about-pictures/JUGSYJINNS.glb" exposure="0.68" camera-controls environment-image="neutral" shadow-intensity="0" camera-orbit="99.65deg 75deg auto">
 
-</model-viewer></div>
+</model-viewer></center></div>
 
 
     </div>
