@@ -8,6 +8,9 @@ import { useGLTF, OrbitControls, rotation, ContactShadows, CameraShake } from '@
 function Model(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/about-pictures/JUGSYJINNS.glb')
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath( './' );
+  loader.setDRACOLoader( dracoLoader );
   
   return (
     <group ref={group} {...props} dispose={null}>
