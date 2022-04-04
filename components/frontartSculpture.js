@@ -11,94 +11,82 @@ function Model(props) {
   
   return (
     <group ref={group} {...props} dispose={null}>
-      <group position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.group_0.geometry}
-          material={materials.texture_0}
-          scale={[12, 12, 12]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["anime-blush-clip-art-png-17"].geometry}
-        material={materials["anime-blush-clip-art-png-17"]}
-        position={[3, -2.4,-1]}
-        rotation={[1, 0.1, 1.3]}
-        scale={[1, 1, 1]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star.geometry}
-        material={materials["colorchart.004"]}
-        position={[0.25, 0.48, -0.04]}
-        rotation={[2.3, 1.19, -0.89]}
-        scale={[0.15, 0.15, 0.15]}
-      />
       <group
-        position={[1, -3, 2]}
-        rotation={[1.31, -0.3, -1.02]}
-        scale={[.0238, .0238, .0238]}
+        position={[0.25, -.4, -0.04]}
+        rotation={[2.3, 1.19, -0.89]}
+        scale={[2.1, 2.1, 2.1]}
       >
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_1.geometry}
+          geometry={nodes.star_1.geometry}
+          material={materials["colorchart.004"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.star_2.geometry}
           material={materials.money}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_2.geometry}
+          geometry={nodes.star_3.geometry}
           material={materials.wire_135110008}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_3.geometry}
+          geometry={nodes.star_4.geometry}
           material={materials.Bottom}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_4.geometry}
+          geometry={nodes.star_5.geometry}
           material={materials["Material.001"]}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_5.geometry}
+          geometry={nodes.star_6.geometry}
           material={materials["colorchart.001"]}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_6.geometry}
+          geometry={nodes.star_7.geometry}
           material={materials.Standard737373}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_7.geometry}
+          geometry={nodes.star_8.geometry}
           material={materials["colorchart.002"]}
         />
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.money_8.geometry}
+          geometry={nodes.star_9.geometry}
           material={materials["Cactus.001"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.star_10.geometry}
+          material={materials["anime-blush-clip-art-png-17"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.star_11.geometry}
+          material={materials.texture_0}
         />
       </group>
     </group>
-    
-
-  )
+  );
 }
-
-// useGLTF.preload('/about-pictures/bread.gltf')
+useGLTF.preload('/about-pictures/JUGSYJINNS.glb')
 
 const JawnHead = () => {
   const controls = useRef()
@@ -131,6 +119,7 @@ const JawnHead = () => {
         <ContactShadows />
         <Suspense fallback={null}>
         <Model />
+        {/* <Preload /> */}
         </Suspense>
         <OrbitControls ref={controls} />
 
