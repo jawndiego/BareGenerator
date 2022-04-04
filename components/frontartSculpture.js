@@ -2,15 +2,26 @@
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
 import { React, Suspense, useRef, useState, useMemo } from 'react'
 import { useGLTF, OrbitControls, rotation, ContactShadows, CameraShake } from '@react-three/drei'
+// import { DRACOLoader, GLTFLoader } from 'three-stdlib';
 
+// const loader = new GLTFLoader();
+// const dracoLoader = new DRACOLoader();
+// dracoLoader.setDecoderPath( './' );
+// loader.setDRACOLoader( dracoLoader );
 
 
 function Model(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/about-pictures/JUGSYJINNS.glb')
-  const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath( './' );
-  loader.setDRACOLoader( dracoLoader );
+
+
+//   return {
+//     ...object,
+//     material,
+//     geometry,
+//     scene
+//   }
+// }
   
   return (
     <group ref={group} {...props} dispose={null}>
@@ -89,9 +100,11 @@ function Model(props) {
     </group>
   );
 }
-useGLTF.preload('/about-pictures/JUGSYJINNS.glb')
+// useGLTF.preload('/about-pictures/JUGSYJINNS.glb')
 
 const JawnHead = () => {
+
+
   const controls = useRef()
   return (
     <div className="front-page_wrapper">
