@@ -50,6 +50,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
+    overflow: scroll;
     border-radius: var(--gutter);
     filter: var(--sm-shadow);
     &:last-child {
@@ -60,6 +61,7 @@
     width: 100%;
     display: grid;
     flex-direction: row;
+    overflow: scroll;
     flex-grow: 6;
     border-bottom: 2px dashed var(--light-grey);
     padding: 1rem 0;

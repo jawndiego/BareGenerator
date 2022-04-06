@@ -12,6 +12,7 @@
     .zora-fullPageDataGrid {
       width: 100%;
       display:grid;
+      overflow: scroll;
     }
     .zora-fullPage {
       display: inline-flex;
@@ -19,6 +20,7 @@
     .zora-fullPageDataGrid {
       max-width: 67rem;
       margin: auto;
+      overflow: scroll;
     }
     .zora-fullMediaWrapper {
       height: 0;
