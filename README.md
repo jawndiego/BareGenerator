@@ -1,3 +1,2 @@
 # Jawn.fr
-
-Bare Generator by @jjjreisss
+built off doge-action template, references openBidFunction from nft-hooks @ourzora, referenced mad realities template to see how auction data was pulled. has uncommented threejs set ups from algo lite, and single object loaders, went with model viewer for the time being cuz gltfLoader x vercel are causing textures to 404. 
