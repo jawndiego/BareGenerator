@@ -5,12 +5,16 @@
     position: relative;
     margin: 0 auto;
     max-width: 96rem;
+    color: black;
     animation-fill-mode: both;
     padding: var(--space-sm) var(--space-sm) var(--space-md);
     .zora-fullMediaWrapper,
-    .zora-fullPage,
     .zora-fullPageDataGrid {
       width: 100%;
+      display:grid;
+    }
+    .zora-fullPage {
+      display: inline-flex;
     }
     .zora-fullPageDataGrid {
       max-width: 67rem;

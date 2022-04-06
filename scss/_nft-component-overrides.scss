@@ -2,23 +2,31 @@
 .zora {
   &-fullMediaWrapper {
     margin: 0 auto var(--space-md)!important;
-    filter: drop-shadow(0 0 0.75rem grey);
+    background-color: white;
+    
+    
   }
   &-fullItemInfo {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    display: grid;
   }
   &-fullLabel {
     opacity: 1!important;
     text-align: center;
+    display: grid;
     margin: auto;
   }
   &-pricingAmount,
   &-fullPageHistoryItemDatestamp {
-    color: var(--price-color)!important;
+    color: black!important;
     opacity: 1!important;
+    justify-content: center;
+    font-weight: 200;
+    text-align: left;
+    display: grid;
   }
   &-fullTitle {
     margin: 0 auto!important;
@@ -50,11 +58,13 @@
   }
   &-fullPageHistoryItem {
     width: 100%;
-    display: flex;
-    flex-direction: row!important;
-    border-bottom: 1px dashed var(--light-grey);
+    display: grid;
+    flex-direction: row;
+    flex-grow: 6;
+    border-bottom: 2px dashed var(--light-grey);
     padding: 1rem 0;
-    justify-content: space-between;
+    justify-content: space-evenly;
+   
     * {
       font-size: var(--text-01)!important;
     }
@@ -94,7 +104,7 @@
     }
   }
   &-textSubdued {
-    color: orange!important;
+    color: black!important;
     opacity: 1!important;
   }
   &-fullLabel {

@@ -20,3 +20,19 @@ export const APP_DESCRIPTION = process.env.NEXT_PUBLIC_DEFAULT_DESCRIPTION || ''
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || ''
 
 export const RPC_URL: string | undefined = process.env.NEXT_PUBLIC_RPC_URL;
+
+export const HOSTED_BID_FLOW =
+  process.env.NEXT_PUBLIC_HOSTED_BID_FLOW === 'true' ||
+  process.env.NEXT_PUBLIC_HOSTED_BID_FLOW === undefined
+    ? true
+    : false
+
+export const LANDING_HERO_TOKEN =
+  process.env.NEXT_PUBLIC_FEATURED_AUCTION_ID=== undefined
+    ? undefined
+    : process.env.NEXT_PUBLIC_FEATURED_AUCTION_ID
+
+export const AUCTION_LIVE =
+  process.env.NEXT_PUBLIC_AUCTION_LIVE === undefined
+    ? false
+    : process.env.NEXT_PUBLIC_AUCTION_LIVE

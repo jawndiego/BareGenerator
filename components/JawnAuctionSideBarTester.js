@@ -1,19 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
 import { useEffect, useState, Fragment } from 'react'
-import {useEthers, useTokenBalance, useEtherBalance, useContractFunction, etherBalance} from '@usedapp/core'
-import { formatUnits, formatEther } from '@ethersproject/units'
 import * as ethers from 'ethers'
-import { Contract } from '@ethersproject/contracts'
-import salesAbi from './abis/algolite-sale';
-import algltlmstrAbi from './abis/algltmstr';
-import connectors from '../utils/connectors';
-import { useWeb3React } from '@web3-react/core'
-import { AuctionHouse } from '@zoralabs/zdk'
-import { Wallet } from 'ethers'
-import { Zora } from '@zoralabs/zdk'
 import {useBidInteraction, AuctionManager, useManageAuction } from '@zoralabs/manage-auction-hooks'
-import { MediaFetchAgent, Networks } from '@zoralabs/nft-hooks'
+import { PricingComponent } from '@zoralabs/nft-components/dist/nft-preview/PricingComponent'
 
 // new imports
 import {
@@ -31,30 +21,34 @@ const CONTRACTS_MAINNET = {
   SALES: '0xa051e1117c6942c94cad161cfab8fae37757783f',
   ALGLTMSTR: '0xfd8d7dbecd5c083dde2b828f96be5d16d1188235'
 }
-
-
 const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   const Contracts = CONTRACTS_MAINNET;
   // const { activateBrowserWallet, activate, deactivate, chainId ,} = useEthers();
-  const { active, account, chainId, library } = useWeb3Wallet();
+  const {  chainId, library } = useWeb3Wallet();
+  const { buttonAction, active, account} = useWalletButton();
   const rpcURL =  "https://mainnet.infura.io/v3/040b908244e941b3b051d60b1e2c9f0c"
   const provider = new ethers.providers.JsonRpcProvider(rpcURL);
 
-
   let walletText = '';
   if (!account) {
-    walletText = `🟥 No wallet connected`
+    walletText = `🥺 no wallet connected`
+    showConnect = true
   } else if (chainId !== 1) {
     walletText = `🟥 Switch your network to mainnet`
   } else {
-    walletText = `🟩 ${account}`
+    walletText = `🅿️ ${account.addressShortened}`
     showConnect = false
-
  
   }
 
-
-  // disables mint button
+  let buttonText = '';
+  if (!account) {
+    buttonText = `connect`
+  } else {
+    buttonText = `disconnect`
+ 
+  }
+  // disables mint  button
   const [busy, setBusy] = useState(false)
   const [isMobile, setIsMobile] = useState();
   const [showConnectors, setShowConnectors] = useState(false);
@@ -64,17 +58,19 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
 
 
   const ConnectWallet = () => {
-    const { buttonAction, actionText, connectedInfo } = useWalletButton();
+    const { buttonAction, account, active} = useWalletButton();
+    
+
     return (
       <div>
-        <button className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")} onClick={() => buttonAction()}>
-        Connect</button> 
+        <button className={["lozenge-button", "doge-sidebar_button-even", "token-button"].join(" ")} onClick={() => [buttonAction(), setShowConnectors(true)]}>
+ {buttonText} </button> 
       </div>
     );
     
   };
 
-  
+
   
   useEffect(() => {
     const mobileCheck = function() {
@@ -89,16 +85,16 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
 
 
   const ManageAuctionButton = () => {
+    
     const {openBidAuction} = useManageAuction();
         return (
           <Fragment>
             <div>
-              <h1></h1>
-            </div>
-            <button className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")} onClick={() => {
+    
+            <button className={["lozenge-button", "token-button"].join(" ")} onClick={() => {
               openBidAuction(auctionId);
             }}> place bid </button>
-            <div>
+      
       
             </div>
           </Fragment>
@@ -120,9 +116,8 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
   // }
 
   return <div className="doge-sidebar_wrapper">
-    
         <div className="doge-sidebar_inner">
-          
+
           <div className="doge-sidebar_title">        
           <p>{`${
           walletText === undefined
@@ -132,25 +127,17 @@ const JawnSidebar = ({showConnect, showHome, showFaq, showMint}) => {
         </div>
         {showConnect ? 
           (!showConnectors ? (
-            <ConnectWallet/>
-          ) : (
-              <button  className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")} onClick={() => buttonAction()}>PERRA</button>
+            <ConnectWallet useENSResolution />
+          ) :  (
+            <ConnectWallet />
           ))
-        : null }
-          <AuctionManager>
-            <ManageAuctionButton />
-          </AuctionManager>
+        : (
+          <AuctionManager >
+          <ManageAuctionButton />
+          <ConnectWallet />
       
-          <div className="doge-sidebar_title">
-          </div>
-          {showHome ? <Link href={'/'}>
-            <div
-              className={["lozenge-button", "doge-sidebar_button-even", "doge-sidebar_history-button"].join(" ")}
-            >
-              Home
-            </div>
-          </Link> : null }
-
+        </AuctionManager>
+        ) }
   </div>
  </div>
 
